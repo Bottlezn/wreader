@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="px30">15dp</dimen>
+    <dimen name="px20">10dp</dimen>
+    <dimen name="px10">5dp</dimen>
+    <dimen name="px6">3dp</dimen>
+    <dimen name="px60">30dp</dimen>
+    <dimen name="px90">45dp</dimen>
+    <dimen name="px120">60dp</dimen>
+    <dimen name="px240">120dp</dimen>
+    <dimen name="px180">90dp</dimen>
+    <dimen name="px320">160dp</dimen>
+    <dimen name="px480">240dp</dimen>
+
+    <dimen name="tsMini">12sp</dimen>
+    <dimen name="tsSmall">14sp</dimen>
+    <dimen name="tsNormal">16sp</dimen>
+    <dimen name="tsBig">18sp</dimen>
+    <dimen name="tsHuge">22sp</dimen>
+    <dimen name="splashLogoWidth">256dp</dimen>
+    <dimen name="splashLogoHeight">512dp</dimen>
+    <dimen name="titleBarHeight">48dp</dimen>
+</resources>

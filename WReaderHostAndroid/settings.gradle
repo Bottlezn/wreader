@@ -1,0 +1,46 @@
+include ':app'
+rootProject.name = 'WReader'
+
+def readLocalProperties(String key) {
+    File file = new File(rootProject.getProjectDir().getAbsolutePath(), 'local.properties')
+    if (file.exists()) {
+        //加载资源
+        InputStream inputStream = null
+        try {
+            //在groovy中使用try(资源){}catch{}的方式好像行不通
+            inputStream = file.newDataInputStream()
+            Properties properties = new Properties()
+            properties.load(inputStream)
+            if (properties.containsKey(key)) {
+                return properties.getProperty(key)
+            } else {
+                return null
+            }
+        } catch (Exception e) {
+            e.printStackTrace()
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close()
+                } catch (Exception e) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    } else {
+        return null
+    }
+}
+//如果flutter module与当前项目不在同级目录下，需要在local.properties中定义：
+//include_flutter.groovy=../wreader_flutter_module/.android/include_flutter.groovy
+//来指定集成的flutter module的目录
+String includeFlutterScriptPath = readLocalProperties('include_flutter.groovy')
+setBinding(new Binding([gradle: this]))
+if (includeFlutterScriptPath == null || includeFlutterScriptPath.isBlank()) {
+    //local.properties没有指定include_flutter.groovy路径，默认认为flutterModule与当前项目在同级目录下
+    evaluate(new File(rootDir.absolutePath.substring(0, rootDir.absolutePath.lastIndexOf(File.separator)),
+            "wreader_flutter_module${File.separator}.android${File.separator}include_flutter.groovy"))
+} else {
+    evaluate(new File(includeFlutterScriptPath))
+}
+include ':wreader_flutter_module'

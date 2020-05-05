@@ -1,0 +1,23 @@
+///依赖的开源库
+const DEPENDENT_LIBS = <String>[
+  "fish_redux",
+  "fluro",
+  "intl",
+  "json_annotation",
+  "convert",
+  "build_runner",
+  "json_serializable",
+  "flutter_i18n",
+  "sqflite",
+  "JGit",
+  "Glide",
+  "slf4j-nop",
+  "PhotoView",
+  "gson",
+  "com.amitshekhar.android:debug-db",
+  "strapdown.js",
+  "jquery",
+  "bootstrap",
+  "FMDB",
+  "WHToast",
+];

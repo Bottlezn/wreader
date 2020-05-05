@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/px10"
+        android:paddingBottom="@dimen/px60"
+        android:text="@string/splash"
+        android:textColor="#eeffffff"
+        android:textSize="@dimen/tsBig"
+        android:visibility="gone"
+        android:textStyle="bold" />
+
+</merge>

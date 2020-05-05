@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clReaderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@color/fadeColor"
+        android:minHeight="@dimen/titleBarHeight"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/px90"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:paddingLeft="@dimen/px20"
+            android:paddingRight="@dimen/px20"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvFileTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px10"
+            android:layout_marginTop="@dimen/px10"
+            android:layout_marginRight="@dimen/px30"
+            android:layout_marginBottom="@dimen/px10"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@id/ivBack"
+            app:layout_constraintRight_toLeftOf="@+id/ivBrightnessMode"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" />
+
+        <TextView
+            android:id="@+id/tvFileInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px10"
+            android:layout_marginTop="@dimen/px6"
+            android:layout_marginRight="@dimen/px30"
+            android:layout_marginBottom="@dimen/px10"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            app:layout_constraintLeft_toRightOf="@id/ivBack"
+            app:layout_constraintRight_toLeftOf="@id/ivBrightnessMode"
+            app:layout_constraintTop_toBottomOf="@+id/tvFileTitle"
+            tools:text="啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" />
+
+        <ImageView
+            android:id="@+id/ivBrightnessMode"
+            android:layout_width="@dimen/px90"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:visibility="invisible"
+            android:padding="@dimen/px20"
+            android:src="@drawable/icon_mode_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <wang.wangzh.wreader.widget.ReadingWebView
+            android:id="@+id/wvMdReader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tvSwipeHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="#88ffffff"
+            android:padding="@dimen/px20"
+            android:text="@string/swipeAndExit"
+            android:textColor="@color/fadeColor"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/flFloat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorReaderBg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <ProgressBar
+                android:layout_width="@dimen/px180"
+                android:layout_height="@dimen/px180"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/px180" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/px20"
+                android:text="@string/showLoading"
+                android:textColor="@color/fadeColor" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

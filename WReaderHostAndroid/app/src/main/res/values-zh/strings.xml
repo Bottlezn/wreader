@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">WReader</string>
+    <string name="splash">感谢使用WReader\nauthor：悟笃笃</string>
+    <string name="grantPermission">请授予应用读写权限！</string>
+
+    <string name="swipeAndExit">快速的向右下方划动以退出页面，点击之后不再提示。</string>
+    <string name="emptyImgResource">图片资源路径为null!</string>
+    <string name="showLoading">加载中，请稍候</string>
+    <string name="flutterError">抱歉，Flutter页面发生了错误，重新打开Flutter页面</string>
+    <string name="imgFileWasEmpty">图片路径为空</string>
+    <string name="logContentWasEmpty">日志内容为空</string>
+    <string name="loging">记录日志中</string>
+    <string name="cloneHint">请不要锁屏或切换App,避免连接中断导致失败,如果有 Clone 失败的工程可以到设置页面清空.</string>
+    <string name="logingFailure">记录日志失败</string>
+    <string name="logingIn">日志被记录到</string>
+</resources>

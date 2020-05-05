@@ -1,0 +1,117 @@
+{
+  "home": {
+    "title": "WReader",
+    "loadingHint": "请稍候，正在初始化中",
+    "goToCloneGitRepo": "配置并克隆Git仓库",
+    "emptyFile": "该文件没有内容哦",
+    "closeGuid": "打开克隆仓库页面",
+    "export": "导出文件",
+    "delete": "删除文件",
+    "moreOperate": "请选择其他文件操作选项.",
+    "openWithNative": "打开文件",
+    "notSupport": "暂时不支持该操作",
+    "exportSuccess": "导出文件成功.\n文件路径:",
+    "iKnow": "我知道啦"
+  },
+  "repoConf": {
+    "title": "参数配置",
+    "save": "保存",
+    "gitUriHint": "请输入git远程仓库的URI",
+    "alreadyExistedUri": "当前git仓库的URI已存在数据表中",
+    "inputGitLocalRepo": "默认'name.git'的name",
+    "selectAuthenticate": "请选择鉴权方式",
+    "localPath": "git仓库的本地父级目录",
+    "errorLocalPath": "获取git仓库的本地存储路径失败",
+    "clickAndCopy": "点击以复制git仓库的本地存储路径",
+    "inputAccount": "请输入账号",
+    "inputPwd": "请输入密码",
+    "inputPriKey": "请输入私钥字符串",
+    "inputPubKey": "请输入公钥字符串",
+    "inputKeyPassphrase": "(可选)私钥密码",
+    "illegalGitUri": "非法的 git URI",
+    "illegalAccountAndPwd": "账号和密码不能为空",
+    "illegalKeyPair": "密钥对字符串不能为空"
+  },
+  "authenticationWay": {
+    "way-0": "不需要鉴权，直接clone",
+    "way-1": "使用账号密码鉴权",
+    "way-2": "使用密钥对鉴权"
+  },
+  "setting": {
+    "displayLanguage": "语言",
+    "followSystem": "跟随系统",
+    "manageRepo": "仓库管理",
+    "cleanInvalidRepo": "删除无用仓库",
+    "cleanInvalidRepoFinished": "已将Clone失败或者其他无效文件删除",
+    "exitApp": "退出App",
+    "versionName": "版本号 ",
+    "about": "关于",
+    "author": "作者：",
+    "myWordHint": "最长16个字符长度",
+    "cancel": "取消",
+    "save": "保存",
+    "projectInfo": "项目信息",
+    "mainSite": "作者主页",
+    "githubSite": "Github",
+    "dependentTitle": "依赖的库、插件",
+    "thanks": "以下排名不分先后，非常感谢！",
+    "logList": "日志列表",
+    "exitSetting": "退出设置",
+    "replicated": "邮箱地址已复制"
+  },
+  "repoList": {
+    "title": "仓库列表",
+    "empty": "这里咩都冇"
+  },
+  "repoDetails": {
+    "currentBranch": "当前分支",
+    "otherOperations": "其他选项",
+    "switchHint": "请选择检出源,如果 Branch 或 Tag 中没有意向源,请检查是否 Pull 项目.",
+    "switchBranch": "切换分支",
+    "fromLocalBranch": "本地分支",
+    "fromRemoteBranch": "远程分支",
+    "fromRemoteTag": "TAG",
+    "existedRemoteBranch": "检出源的本地分支以存在,正在切换到已存在的本地分支中.",
+    "tagBranchCannotUpdate": "从 TAG 检出的 Branch 不能更新哦."
+  },
+  "manageRepo": {
+    "title": "管理仓库",
+    "currentBranch": "当前分支",
+    "delete": "删除",
+    "deleteConfirm": "确定删除",
+    "deleteSuccess": "该仓库及其相关阅读记录删除成功",
+    "cancel": "取消",
+    "swipeToDelete": "左划或者右划删除仓库",
+    "empty": "这里咩都冇"
+  },
+  "toast": {
+    "emptyTextWarn": "文本不能为空哦",
+    "click2HomeHint": "再次点击回到桌面",
+    "cancelConfFileSelected": "配置文件选择被取消",
+    "parseConfFileError": "解析配置文件失败",
+    "fillConfFileSuccess": "填充配置信息成功",
+    "parseFail": "解析失败！",
+    "cloneSuccess": "克隆成功！",
+    "cloneFail": "克隆失败",
+    "saveSuccess": "保存成功！",
+    "repoDbDataInsertFail": "仓库数据库信息插入失败！",
+    "successOperationAndReload": "所选操作成功，重新载入仓库信息！",
+    "resetBranchSuccess": "Reset当前仓库成功！",
+    "reloadPage": "重新载入仓库信息",
+    "pullSuccessAndReload": "Pull成功并且重载仓库信息",
+    "switchSuccessAndReload": "切换仓库成功并且重载仓库信息",
+    "pullFail": "Pull失败",
+    "openFileFail": "打开文件失败！",
+    "operationFail": "所选操作失败",
+    "tryToResetRepo": "尝试重置仓库"
+  },
+  "logList": {
+    "title": "日志列表",
+    "deleting": "请稍候，正在删除日志文件中。",
+    "deleteAll": "确定删除所有日志文件吗？"
+  },
+  "searchReadingRecord": {
+    "hint": "请输入文件名或者 git 本地文件件名称",
+    "noResult": "没有搜索结果哦!"
+  }
+}

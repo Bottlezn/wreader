@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/pv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88000000" />
+
+    <TextView
+        android:id="@+id/tvSwipeHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#88ffffff"
+        android:padding="@dimen/px20"
+        android:text="@string/swipeAndExit"
+        android:textColor="@color/fadeColor"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</merge>

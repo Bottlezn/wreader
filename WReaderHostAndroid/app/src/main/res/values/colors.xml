@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="color66">#666666</color>
+    <color name="color63">#333333</color>
+    <color name="color69">#999999</color>
+    <color name="color6e">#eeeeee</color>
+    <color name="fadeColor">#e65252</color>
+    <color name="statusBarColor">#b33d3d</color>
+    <color name="logoColorBottomColor">#e65252</color>
+    <color name="colorReaderBg">#002b36</color>
+</resources>

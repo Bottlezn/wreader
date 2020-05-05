@@ -1,0 +1,117 @@
+{
+  "home": {
+    "title": "WReader",
+    "loadingHint": "wait a second,it's initializing",
+    "goToCloneGitRepo": "ConfAndClone",
+    "emptyFile": "The text file is empty",
+    "closeGuid": "Close guid and go to conf git.",
+    "export": "ExportFile",
+    "delete": "DeleteFile",
+    "moreOperate": "More File Operation.",
+    "openWithNative": "OpenFile",
+    "notSupport": "Not Support!",
+    "exportSuccess": "Export File Success.\nFilePath:",
+    "iKnow": "OK"
+  },
+  "repoConf": {
+    "title": "ConfigRepository",
+    "save": "save",
+    "gitUriHint": "please input the remote uri of the git repository.",
+    "alreadyExistedUri": "current git uri already existed.",
+    "inputGitLocalRepo": "git's local repository name,can be empty.",
+    "selectAuthenticate": "please select the way of authentication.",
+    "localPath": "the root dir of the git repository,click can show the details.",
+    "errorLocalPath": "obtain git local root path failure.",
+    "clickAndCopy": "Copy the localPath to the paste board.",
+    "inputAccount": "Please input account.",
+    "inputPwd": "Please input password.",
+    "inputPriKey": "Please input private key.",
+    "inputPubKey": "Please input public key.",
+    "inputKeyPassphrase": "(optional)private key's passphrase",
+    "illegalGitUri": "Git uri can't be empty or have not end with '.git'!",
+    "illegalAccountAndPwd": "Account and password cannot be empty!",
+    "illegalKeyPair": "PriKey and pubKey cannot be empty!"
+  },
+  "authenticationWay": {
+    "way-0": "Don't need to authentication.",
+    "way-1": "Use account and password authentication.",
+    "way-2": "Authentication using key pairs of RSA."
+  },
+  "setting": {
+    "displayLanguage": "Language",
+    "followSystem": "followSystem",
+    "manageRepo": "ManageRepo",
+    "cleanInvalidRepo": "CleanInvalidRepo",
+    "cleanInvalidRepoFinished": "Clone failed or another invalid file was deleted",
+    "exitApp": "ExitApp",
+    "versionName": "VersionName ",
+    "about": "About",
+    "author": "Author：",
+    "myWordHint": "Please enter text up to 16 characters long",
+    "cancel": "Cancel",
+    "save": "Save",
+    "projectInfo": "ProjectInformation",
+    "mainSite": "AuthorHomeSite",
+    "githubSite": "Github",
+    "dependentTitle": "Dependent libs and plugin",
+    "thanks": "In no particular order, thank you very much.",
+    "logList": "LogList",
+    "exitSetting": "ExitSetting",
+    "replicated": "EmailReplicated"
+  },
+  "repoList": {
+    "title": "RepoList",
+    "empty": "there's nothing here"
+  },
+  "repoDetails": {
+    "currentBranch": "currentBranch",
+    "otherOperations": "OtherOperations",
+    "switchHint": "Select the checkout source, and if there is no intent source in Branch or Tag, check to see if the Pull project is there.",
+    "switchBranch": "SwitchBranch",
+    "fromLocalBranch": "LocalBranch",
+    "fromRemoteBranch": "RemoteBranch",
+    "fromRemoteTag": "RemoteTag",
+    "existedRemoteBranch": "This branch exists locally. Try to switch branches.",
+    "tagBranchCannotUpdate": "The branch which checkout from TAG can't not update."
+  },
+  "manageRepo": {
+    "title": "ManageConf",
+    "currentBranch": "currentBranch",
+    "delete": "delete",
+    "deleteConfirm": "Are u confirm delete ",
+    "deleteSuccess": "The repository and its associated reading records were deleted successfully!",
+    "cancel": "cancel",
+    "swipeToDelete": "Delete the warehouse with a left or right swipe",
+    "empty": "There are nothing here."
+  },
+  "toast": {
+    "emptyTextWarn": "Text can't not be empty!",
+    "click2HomeHint": "Click again and goto Launcher!",
+    "cancelConfFileSelected": "Configuration file selection is canceled.",
+    "parseConfFileError": "Failed to resolve the configuration file.",
+    "fillConfFileSuccess": "The configuration file was populated successfully.",
+    "parseFail": "Parse Fail!",
+    "cloneSuccess": "Clone Success!",
+    "cloneFail": "Clone Fail!",
+    "saveSuccess": "Save Success!",
+    "repoDbDataInsertFail": "Repo info insert fail!",
+    "successOperationAndReload": "The operation succeeds and the page is reloaded.",
+    "resetBranchSuccess": "Reset Branch Success!",
+    "reloadPage": "Reload Page.",
+    "pullSuccessAndReload": "Pull operation succeeds and the page is reloaded",
+    "switchSuccessAndReload": "Switch operation succeeds and the page is reloaded",
+    "pullFail": "Pull Fail!",
+    "openFileFail": "Open file operation fail!",
+    "operationFail": "The operation failure",
+    "tryToResetRepo": "Trying to reset the repository"
+  },
+  "logList": {
+    "title": "LogList",
+    "deleting": "Please wait while it is being deleted.",
+    "deleteAll": "Are you sure to delete all files?"
+  },
+  "searchReadingRecord": {
+    "hint": "input fileName or gitLocalDirName",
+    "noResult": "There's no search result here!"
+  }
+}

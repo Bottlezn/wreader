@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WReader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- name为'displayConfig'的meta，存储了当前页面的主题信息与日夜间模式信息，在加载md内容时也需传入   -->
+    <meta name="displayConfig" content="file:///android_asset/themes/bootstrap-solar.min.css;1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="file:///android_asset/themes/united.min.css" rel="stylesheet">
+    <link href="file:///android_asset/strapdown.css" rel="stylesheet">
+    <link href="file:///android_asset/themes/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="file:///android_asset/themes/bootstrap-solar.min.css" rel="stylesheet">
+    <script src="file:///android_asset/base64.min.js"></script>
+    <script src="file:///android_asset/jquery.min.js"></script>
+    <script src="file:///android_asset/strapdown.js"></script>
+</head>
+<body>
+<!--添加间距-->
+<div style="height:10px;"></div>
+<div id='mdContent'></div>
+<script type="text/javascript">
+        function showMdContent(mdContent) {
+            mdContent = new Base64().decode(mdContent);
+            markdownFromText(mdContent, 'mdContent');
+            adjustPreTagsStyle();
+            window.bridge.hideFloat();
+        }
+        // 修改主题，日间与夜间，主题资源路径由原生传入
+        // 模式，0是日间，1是夜间
+        function modifyTheme(href, mode) {
+            //是否移除最后一项link
+            var removeLast = true;
+            var newContent = href + ';' + mode;
+            var metaContent = document.getElementsByTagName('meta')['displayConfig'].content;
+            console.log("metaContent = " + metaContent);
+            console.log("newContent = " + newContent);
+            if (isEmpty(metaContent)) {
+                removeLast = false;
+            } else if (newContent == metaContent) {
+                console.log('配置相同，不需要切换主体与亮暗模式。');
+                return;
+            }
+            console.log("removeLast = " + removeLast);
+            var links = document.getElementsByTagName("link");
+            var deleteIndex = links.length - 1;
+            //主题是否应该替换
+            var shouldAdd = true;
+            var links = document.getElementsByTagName("link");
+            for (var i = 0; i < links.length; i++) {
+                if (links[i] && links[i].href && links[i].href == href) {
+                    shouldAdd = false;
+                }
+            }
+            if (shouldAdd) {
+                if (removeLast) {
+                    //删除当前主题，替换主题
+                    links[deleteIndex].parentNode.removeChild(links[deleteIndex]);
+                }
+                //替换主题
+                var $link = document.createElement("link");
+                $link.setAttribute("rel", "stylesheet");
+                $link.setAttribute("type", "text/css");
+                $link.setAttribute("href", href);
+                document.getElementsByTagName("head").item(0).appendChild($link);
+            }
+            document.getElementsByTagName('meta')['displayConfig'].content = newContent;
+            adjustPreTagsStyle();
+            console.log(document.getElementsByTagName('meta')['displayConfig'].content);
+        }
+
+        //判断字符是否为空的方法
+        function isEmpty(obj) {
+            if (typeof obj == "undefined" || obj == null || obj == "") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //调节pre标签,根据亮暗模式也会调整块内滑动
+        function adjustPreTagsStyle() {
+            var content = document.getElementsByTagName('meta')['displayConfig'].content;
+            var mode = content.substring(content.length - 1, content.length);
+            //替换tag的背景颜色，夜间设置背景颜色略暗，日间不设置
+            var preTags = document.getElementsByTagName('pre');
+            var codeTags = document.getElementsByTagName('code');
+            for (var i = 0; i < codeTags.length; i++) {
+                if ('1' == mode) {
+                    codeTags[i].style.backgroundColor = "#A2A2A2";
+                } else {
+                    codeTags[i].style.backgroundColor = null;
+                }
+            }
+            for (var i = 0; i < preTags.length; i++) {
+                if ('1' == mode) {
+                    preTags[i].style.backgroundColor = "#A2A2A2";
+                } else {
+                    preTags[i].style.backgroundColor = null;
+                }
+                //将换行符号替换成<br/>
+                var reg = new RegExp( '\n' , "g" )
+                preTags[i].innerHTML = preTags[i].innerHTML.replace(reg, "<br>");
+                preTags[i].style.overflowX = "auto";
+                preTags[i].style.whiteSpace="pre";
+                preTags[i].style.width="80";
+            }
+        }
+</script>
+</body>
+
+</html>

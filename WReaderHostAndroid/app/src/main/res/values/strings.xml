@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WReader</string>
+    <string name="splash">Thanks for using WReader\nauthor：悟笃笃</string>
+    <string name="grantPermission">Please grant permission!</string>
+    <string name="swipeAndExit">Quickly right-bottom swipe to exit the page,It will not be prompted after clicking.</string>
+    <string name="emptyImgResource">emptyImgResource!</string>
+    <string name="showLoading">loading</string>
+    <string name="flutterError">flutterError</string>
+    <string name="imgFileWasEmpty">The image path is empty</string>
+    <string name="logContentWasEmpty">The log is empty and cannot be recorded</string>
+    <string name="loging">Log the exception in the log</string>
+    <string name="logingFailure">Record exception failure</string>
+    <string name="cloneHint">Please do not lock the screen or switch the App to avoid failure caused by connection interruption. If there is Clone failed project, you can go to the Settings page to clear.</string>
+    <string name="logingIn">The log is logged</string>
+</resources>

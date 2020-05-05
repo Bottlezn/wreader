@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#44000000">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvCloneDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_clone_details_layout"
+        android:overScrollMode="never"
+        android:padding="@dimen/px30"
+        android:scrollbarSize="@dimen/px30"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/tvCloneDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/px10"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tsSmall"
+            tools:text="begin clone...\nclone in xxx" />
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

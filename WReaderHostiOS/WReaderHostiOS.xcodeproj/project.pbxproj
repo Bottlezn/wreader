@@ -1,0 +1,544 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2926E40B245BD90200EE5558 /* FlutterMethodConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2926E40A245BD90200EE5558 /* FlutterMethodConst.m */; };
+		2926E412245BEBA300EE5558 /* FlutterModuleDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2926E411245BEBA300EE5558 /* FlutterModuleDBHelper.m */; };
+		2926E416245C2DBD00EE5558 /* EnvConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2926E415245C2DBD00EE5558 /* EnvConfig.m */; };
+		2926E41B245C40B900EE5558 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2926E41A245C40B900EE5558 /* ToastUtil.m */; };
+		29287A58245955DC00E4C074 /* WReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29287A57245955DC00E4C074 /* WReaderViewController.m */; };
+		29287A5F2459711500E4C074 /* FlutterConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 29287A5E2459711500E4C074 /* FlutterConst.m */; };
+		296F9AE42454354300F02B03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F9AE32454354300F02B03 /* AppDelegate.m */; };
+		296F9AEA2454354300F02B03 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F9AE92454354300F02B03 /* ViewController.m */; };
+		296F9AF02454354300F02B03 /* WReaderHostiOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 296F9AEE2454354300F02B03 /* WReaderHostiOS.xcdatamodeld */; };
+		296F9AF22454354400F02B03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296F9AF12454354400F02B03 /* Assets.xcassets */; };
+		296F9AF52454354400F02B03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296F9AF32454354400F02B03 /* LaunchScreen.storyboard */; };
+		296F9AF82454354400F02B03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 296F9AF72454354400F02B03 /* main.m */; };
+		F208A10E05ACE688D79B117F /* Pods_WReaderHostiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E1C9D6E07DAECAF0E7A72B /* Pods_WReaderHostiOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2926E409245BD90200EE5558 /* FlutterMethodConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlutterMethodConst.h; sourceTree = "<group>"; };
+		2926E40A245BD90200EE5558 /* FlutterMethodConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlutterMethodConst.m; sourceTree = "<group>"; };
+		2926E410245BEBA300EE5558 /* FlutterModuleDBHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlutterModuleDBHelper.h; sourceTree = "<group>"; };
+		2926E411245BEBA300EE5558 /* FlutterModuleDBHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlutterModuleDBHelper.m; sourceTree = "<group>"; };
+		2926E414245C2DBD00EE5558 /* EnvConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnvConfig.h; sourceTree = "<group>"; };
+		2926E415245C2DBD00EE5558 /* EnvConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnvConfig.m; sourceTree = "<group>"; };
+		2926E419245C40B900EE5558 /* ToastUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToastUtil.h; sourceTree = "<group>"; };
+		2926E41A245C40B900EE5558 /* ToastUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToastUtil.m; sourceTree = "<group>"; };
+		29287A56245955DC00E4C074 /* WReaderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WReaderViewController.h; sourceTree = "<group>"; };
+		29287A57245955DC00E4C074 /* WReaderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WReaderViewController.m; sourceTree = "<group>"; };
+		29287A5D2459711500E4C074 /* FlutterConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlutterConst.h; sourceTree = "<group>"; };
+		29287A5E2459711500E4C074 /* FlutterConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlutterConst.m; sourceTree = "<group>"; };
+		296F9ADF2454354300F02B03 /* WReaderHostiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WReaderHostiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		296F9AE22454354300F02B03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		296F9AE32454354300F02B03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		296F9AE82454354300F02B03 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		296F9AE92454354300F02B03 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		296F9AEF2454354300F02B03 /* WReaderHostiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WReaderHostiOS.xcdatamodel; sourceTree = "<group>"; };
+		296F9AF12454354400F02B03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		296F9AF42454354400F02B03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		296F9AF62454354400F02B03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		296F9AF72454354400F02B03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		90E1C9D6E07DAECAF0E7A72B /* Pods_WReaderHostiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WReaderHostiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A246D378B33863DE0113D68B /* Pods-WReaderHostiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WReaderHostiOS.debug.xcconfig"; path = "Target Support Files/Pods-WReaderHostiOS/Pods-WReaderHostiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		F1225EF5E40C4DAAEBAF1B69 /* Pods-WReaderHostiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WReaderHostiOS.release.xcconfig"; path = "Target Support Files/Pods-WReaderHostiOS/Pods-WReaderHostiOS.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		296F9ADC2454354300F02B03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F208A10E05ACE688D79B117F /* Pods_WReaderHostiOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04B0434B68DFE4F5732E6286 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A246D378B33863DE0113D68B /* Pods-WReaderHostiOS.debug.xcconfig */,
+				F1225EF5E40C4DAAEBAF1B69 /* Pods-WReaderHostiOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		2926E40F245BEB8900EE5558 /* DBHelper */ = {
+			isa = PBXGroup;
+			children = (
+				2926E410245BEBA300EE5558 /* FlutterModuleDBHelper.h */,
+				2926E411245BEBA300EE5558 /* FlutterModuleDBHelper.m */,
+			);
+			path = DBHelper;
+			sourceTree = "<group>";
+		};
+		2926E413245C2DA800EE5558 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2926E414245C2DBD00EE5558 /* EnvConfig.h */,
+				2926E415245C2DBD00EE5558 /* EnvConfig.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2926E417245C40A300EE5558 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2926E418245C40A900EE5558 /* Toast */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2926E418245C40A900EE5558 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				2926E419245C40B900EE5558 /* ToastUtil.h */,
+				2926E41A245C40B900EE5558 /* ToastUtil.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		29287A552459557C00E4C074 /* Flutter */ = {
+			isa = PBXGroup;
+			children = (
+				2926E413245C2DA800EE5558 /* Model */,
+				2926E40F245BEB8900EE5558 /* DBHelper */,
+				29287A5C245970DC00E4C074 /* Const */,
+				29287A56245955DC00E4C074 /* WReaderViewController.h */,
+				29287A57245955DC00E4C074 /* WReaderViewController.m */,
+			);
+			path = Flutter;
+			sourceTree = "<group>";
+		};
+		29287A59245960BB00E4C074 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				2926E417245C40A300EE5558 /* Utils */,
+				29287A552459557C00E4C074 /* Flutter */,
+				295EE4BB24594687003B02F3 /* RootVC */,
+				295EE4BA24594641003B02F3 /* AppDelegate */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		29287A5C245970DC00E4C074 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				29287A5D2459711500E4C074 /* FlutterConst.h */,
+				29287A5E2459711500E4C074 /* FlutterConst.m */,
+				2926E409245BD90200EE5558 /* FlutterMethodConst.h */,
+				2926E40A245BD90200EE5558 /* FlutterMethodConst.m */,
+			);
+			path = Const;
+			sourceTree = "<group>";
+		};
+		295EE4BA24594641003B02F3 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				296F9AE22454354300F02B03 /* AppDelegate.h */,
+				296F9AE32454354300F02B03 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		295EE4BB24594687003B02F3 /* RootVC */ = {
+			isa = PBXGroup;
+			children = (
+				296F9AE82454354300F02B03 /* ViewController.h */,
+				296F9AE92454354300F02B03 /* ViewController.m */,
+			);
+			path = RootVC;
+			sourceTree = "<group>";
+		};
+		296F9AD62454354300F02B03 = {
+			isa = PBXGroup;
+			children = (
+				296F9AE12454354300F02B03 /* WReaderHostiOS */,
+				296F9AE02454354300F02B03 /* Products */,
+				04B0434B68DFE4F5732E6286 /* Pods */,
+				FF9B821CE3FC0BA8EBA6EB16 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		296F9AE02454354300F02B03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				296F9ADF2454354300F02B03 /* WReaderHostiOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		296F9AE12454354300F02B03 /* WReaderHostiOS */ = {
+			isa = PBXGroup;
+			children = (
+				29287A59245960BB00E4C074 /* Class */,
+				296F9AF12454354400F02B03 /* Assets.xcassets */,
+				296F9AF32454354400F02B03 /* LaunchScreen.storyboard */,
+				296F9AF62454354400F02B03 /* Info.plist */,
+				296F9AF72454354400F02B03 /* main.m */,
+				296F9AEE2454354300F02B03 /* WReaderHostiOS.xcdatamodeld */,
+			);
+			path = WReaderHostiOS;
+			sourceTree = "<group>";
+		};
+		FF9B821CE3FC0BA8EBA6EB16 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90E1C9D6E07DAECAF0E7A72B /* Pods_WReaderHostiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		296F9ADE2454354300F02B03 /* WReaderHostiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 296F9AFB2454354400F02B03 /* Build configuration list for PBXNativeTarget "WReaderHostiOS" */;
+			buildPhases = (
+				88C39414DBD35D8A2C31408F /* [CP] Check Pods Manifest.lock */,
+				51D1D1B764804667C31FF510 /* [CP-User] Run Flutter Build Script */,
+				296F9ADB2454354300F02B03 /* Sources */,
+				296F9ADC2454354300F02B03 /* Frameworks */,
+				296F9ADD2454354300F02B03 /* Resources */,
+				7F9788B6A3E6E7D1CE230E5E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WReaderHostiOS;
+			productName = WReaderHostiOS;
+			productReference = 296F9ADF2454354300F02B03 /* WReaderHostiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		296F9AD72454354300F02B03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "王展鸿";
+				TargetAttributes = {
+					296F9ADE2454354300F02B03 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 296F9ADA2454354300F02B03 /* Build configuration list for PBXProject "WReaderHostiOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 296F9AD62454354300F02B03;
+			productRefGroup = 296F9AE02454354300F02B03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				296F9ADE2454354300F02B03 /* WReaderHostiOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		296F9ADD2454354300F02B03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				296F9AF52454354400F02B03 /* LaunchScreen.storyboard in Resources */,
+				296F9AF22454354400F02B03 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51D1D1B764804667C31FF510 /* [CP-User] Run Flutter Build Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../wreader_flutter_module/.metadata",
+				"${SRCROOT}/../wreader_flutter_module/.ios/Flutter/App.framework/App",
+				"${SRCROOT}/../wreader_flutter_module/.ios/Flutter/engine/Flutter.framework/Flutter",
+				"${SRCROOT}/../wreader_flutter_module/.ios/Flutter/flutter_export_environment.sh",
+			);
+			name = "[CP-User] Run Flutter Build Script";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nsource \"${SRCROOT}/../wreader_flutter_module/.ios/Flutter/flutter_export_environment.sh\"\n\"$FLUTTER_ROOT\"/packages/flutter_tools/bin/xcode_backend.sh build";
+		};
+		7F9788B6A3E6E7D1CE230E5E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WReaderHostiOS/Pods-WReaderHostiOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WReaderHostiOS/Pods-WReaderHostiOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WReaderHostiOS/Pods-WReaderHostiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88C39414DBD35D8A2C31408F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WReaderHostiOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		296F9ADB2454354300F02B03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				296F9AF82454354400F02B03 /* main.m in Sources */,
+				2926E40B245BD90200EE5558 /* FlutterMethodConst.m in Sources */,
+				296F9AEA2454354300F02B03 /* ViewController.m in Sources */,
+				29287A58245955DC00E4C074 /* WReaderViewController.m in Sources */,
+				2926E412245BEBA300EE5558 /* FlutterModuleDBHelper.m in Sources */,
+				296F9AE42454354300F02B03 /* AppDelegate.m in Sources */,
+				2926E416245C2DBD00EE5558 /* EnvConfig.m in Sources */,
+				2926E41B245C40B900EE5558 /* ToastUtil.m in Sources */,
+				29287A5F2459711500E4C074 /* FlutterConst.m in Sources */,
+				296F9AF02454354300F02B03 /* WReaderHostiOS.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		296F9AF32454354400F02B03 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				296F9AF42454354400F02B03 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		296F9AF92454354400F02B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		296F9AFA2454354400F02B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		296F9AFC2454354400F02B03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A246D378B33863DE0113D68B /* Pods-WReaderHostiOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JPU882HV59;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = WReaderHostiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = wangzh.wang.WReaderHostiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		296F9AFD2454354400F02B03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1225EF5E40C4DAAEBAF1B69 /* Pods-WReaderHostiOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JPU882HV59;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = WReaderHostiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = wangzh.wang.WReaderHostiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		296F9ADA2454354300F02B03 /* Build configuration list for PBXProject "WReaderHostiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				296F9AF92454354400F02B03 /* Debug */,
+				296F9AFA2454354400F02B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		296F9AFB2454354400F02B03 /* Build configuration list for PBXNativeTarget "WReaderHostiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				296F9AFC2454354400F02B03 /* Debug */,
+				296F9AFD2454354400F02B03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		296F9AEE2454354300F02B03 /* WReaderHostiOS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				296F9AEF2454354300F02B03 /* WReaderHostiOS.xcdatamodel */,
+			);
+			currentVersion = 296F9AEF2454354300F02B03 /* WReaderHostiOS.xcdatamodel */;
+			path = WReaderHostiOS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 296F9AD72454354300F02B03 /* Project object */;
+}
