@@ -67,7 +67,7 @@
     "currentBranch": "currentBranch",
     "otherOperations": "OtherOperations",
     "switchHint": "Select the checkout source, and if there is no intent source in Branch or Tag, check to see if the Pull project is there.",
-    "switchBranch": "SwitchBranch",
+    "switchBranch": "Switch",
     "fromLocalBranch": "LocalBranch",
     "fromRemoteBranch": "RemoteBranch",
     "fromRemoteTag": "RemoteTag",

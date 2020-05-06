@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply from: 'sign.gradle'
+
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
@@ -26,13 +28,34 @@ android {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
     }
+    // 如果有私人密钥被配置在 local.properties 中，使用签名配置
+    boolean useSign = signKeyFile != null && new File(signKeyFile).exists()
+    if (useSign) {
+        println("Have a sign key")
+        signingConfigs {
+            wreader {
+                storeFile file("${signKeyFile}")
+                keyAlias "${signKeyAlias}"
+                keyPassword "${signKeyPassword}"
+                storePassword "${signStorePassword}"
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (useSign) {
+                println("release:use sign key")
+                signingConfig signingConfigs.wreader
+            }
         }
         debug {
             minifyEnabled false
+            if (useSign) {
+                println("debug:use sign key")
+                signingConfig signingConfigs.wreader
+            }
         }
     }
     android.applicationVariants.all { variant ->
@@ -54,7 +77,7 @@ android {
 }
 
 dependencies {
-    def jgitVersion = '5.7.0.202003110725-r'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -66,8 +89,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     //依赖flutter module
     implementation project(':flutter')
-    //依赖jgit
-    implementation "org.eclipse.jgit:org.eclipse.jgit:$jgitVersion"
+    implementation 'com.jcraft:jsch:0.1.55'
+    //    def jgitVersion = '5.7.0.202003110725-r'
+    //依赖jgit，改成依赖 本地 jar 包的方式
+    //implementation "org.eclipse.jgit:org.eclipse.jgit:$jgitVersion"
     implementation "org.slf4j:slf4j-nop:1.7.2"
     //依赖photoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'

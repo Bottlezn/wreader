@@ -506,6 +506,8 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                             result.success("Delete specified repo fail:$e")
                             releaseConsole()
                         })
+                    } finally {
+                        releaseConsole()
                     }
                 })
             }
@@ -565,6 +567,8 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                     } catch (e: java.lang.Exception) {
                         e.printStackTrace()
                         result.success("Delete all invalid error:${e}")
+                        releaseConsole()
+                    } finally {
                         releaseConsole()
                     }
                 })
@@ -1065,7 +1069,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         )
                     })
                 }
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 Log.e(TAG, e.toString())
                 e.printStackTrace()
                 MainHandler.runOnMain(Runnable {
@@ -1171,7 +1175,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         )
                     })
                 }
-            } catch (e: java.lang.Exception) {
+            } catch (e: Throwable) {
                 e.printStackTrace()
                 MainHandler.runOnMain(Runnable {
                     result.success(

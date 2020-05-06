@@ -67,7 +67,7 @@
     "currentBranch": "当前分支",
     "otherOperations": "其他选项",
     "switchHint": "请选择检出源,如果 Branch 或 Tag 中没有意向源,请检查是否 Pull 项目.",
-    "switchBranch": "切换分支",
+    "switchBranch": "Switch",
     "fromLocalBranch": "本地分支",
     "fromRemoteBranch": "远程分支",
     "fromRemoteTag": "TAG",
