@@ -2,6 +2,8 @@
 
 **一个功能简单、页面简陋、却又实用的带有 Git 只读功能的阅读器。提供私有 Git 仓库克隆，分支、标签检出与切换等功能，主要用于阅读 Markdown 笔记。**  
 
+![demonstration](wreader_flutter_module/assets/images/gif_clone_guid.gif)  
+
 ## 运行  
 
 1. Clone 项目：`git clone git@github.com:Bottlezn/wreader.git `
@@ -47,7 +49,9 @@ iOS 平台的功能尚未完成.
 ## email  
 我的邮箱地址： `wdu_udw@163.com` 。
 
-## LICENSE
+## 下载
+
+[ChangeLog](ChangeLog.md)
 
 ## LICENSE
 

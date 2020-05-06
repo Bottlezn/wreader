@@ -1,7 +1,9 @@
 [ReadMe-zh.md](ReadMe-zh.md). 
 
 ## WReader  
-**WReader was a reader which support Git's read-only operation and was designed primarily to view Markdown files.You can checkout branch or tag from remote, and switch them in the local.**  
+**WReader was a reader which support Git's read-only operation and was designed primarily to view Markdown files.You can checkout branch or tag from remote, and switch them in the local.**    
+
+![demonstration](wreader_flutter_module/assets/images/gif_clone_guid.gif)  
 
 ## Run
 1. clone project
@@ -21,6 +23,10 @@ The functionality of the iOS platform is not yet complete.
 ## email  
 
 `wdu_udw@163.com` 。
+
+## Download
+
+[ChangeLog](ChangeLog.md)
 
 ## LICENSE
 
