@@ -1,0 +1,6 @@
+framework module Pods_WReaderHostiOS {
+  umbrella header "Pods-WReaderHostiOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

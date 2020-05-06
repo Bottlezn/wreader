@@ -1,0 +1,49 @@
+PODS:
+  - Flutter (1.0.0)
+  - FlutterPluginRegistrant (0.0.1):
+    - Flutter
+    - sqflite
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
+  - WHToast (0.0.3)
+  - wreader_flutter_module (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `../wreader_flutter_module/.ios/Flutter/engine`)
+  - FlutterPluginRegistrant (from `../wreader_flutter_module/.ios/Flutter/FlutterPluginRegistrant`)
+  - FMDB (= 2.7.5)
+  - sqflite (from `../wreader_flutter_module/.ios/Flutter/.symlinks/sqflite/ios`)
+  - WHToast (~> 0.0.3)
+  - wreader_flutter_module (from `../wreader_flutter_module/.ios/Flutter`)
+
+SPEC REPOS:
+  trunk:
+    - FMDB
+    - WHToast
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: "../wreader_flutter_module/.ios/Flutter/engine"
+  FlutterPluginRegistrant:
+    :path: "../wreader_flutter_module/.ios/Flutter/FlutterPluginRegistrant"
+  sqflite:
+    :path: "../wreader_flutter_module/.ios/Flutter/.symlinks/sqflite/ios"
+  wreader_flutter_module:
+    :path: "../wreader_flutter_module/.ios/Flutter"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  FlutterPluginRegistrant: 65b3aa07cc8b514c9783875451b361843ec44311
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  WHToast: 30d7f1734ff57b391da4050fab13a2af0e95638c
+  wreader_flutter_module: 8187a9674f6a7dec36e4ae6b79fb1820fdb4b2fb
+
+PODFILE CHECKSUM: eaa92bf75896c50c0697984c7ea2b2c531d3c51d
+
+COCOAPODS: 1.9.1
