@@ -68,7 +68,7 @@ var repoListHandler = Handler(
   return RepoListPage();
 });
 
-///仓库列表页面
+///设置页面
 var settingPage = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
   return SettingPage();

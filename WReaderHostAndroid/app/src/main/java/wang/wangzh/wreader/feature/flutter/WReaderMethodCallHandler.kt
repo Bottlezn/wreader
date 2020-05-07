@@ -75,7 +75,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 ChannelIncomingMethod.READ_MD_FILE -> readTextFile(call, result)
                 ChannelIncomingMethod.BROWSE_IMAGE -> browseImage(call, result)
                 ChannelIncomingMethod.OPEN_FILE_USE_OTHER_APP -> openFileUseOtherApp(call, result)
-                ChannelIncomingMethod.CLEAR_INVALID_REPO -> cleaInvalidRepo(call, result)
+                ChannelIncomingMethod.CLEAR_INVALID_REPO -> cleaInvalidRepo(aty, result)
                 ChannelIncomingMethod.CLEAR_SPECIFIED_REPO -> cleanSpecifiedRepo(call, result)
                 ChannelIncomingMethod.GOTO_HOME -> gotoHome(result)
                 ChannelIncomingMethod.GET_VERSION_INFO -> getVersionInfo(result)
@@ -521,64 +521,61 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     /**
      * 清理那些clone失败的无效仓库
      */
-    private fun cleaInvalidRepo(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
-                    try {
-                        val list = FlutterModuleDbHelper.queryRepoList(aty)
-                        val repoList = obtainRootDir(aty).listFiles()
-                        Log.i(TAG, list.toString())
-                        val deleteTargets = ArrayList<String>()
-                        if (repoList == null) {
-                            MainHandler.runOnMain(Runnable {
-                                result.success("Have no invalid repo.")
-                                releaseConsole()
-                            })
-                            return@Runnable
-                        }
-                        repoList.forEach {
-                            if (!list.contains(
-                                    it.absolutePath.substring(
-                                        it.absolutePath.lastIndexOf(
-                                            File.separator
-                                        ) + 1, it.absolutePath.length
-                                    )
-                                )
-                            ) {
-                                deleteTargets.add(it.absolutePath)
-                            }
-                        }
-                        if (deleteTargets.isEmpty()) {
-                            MainHandler.runOnMain(Runnable {
-                                result.success("Have no invalid repo.")
-                            })
-                        } else {
-                            //展示删除进度窗口
-                            createNewConsole(aty)
-                            deleteTargets.forEach {
-                                MainHandler.runOnMain(Runnable {
-                                    progressConsole?.appendLine("start delete.")
-                                })
-                                deleteInvalidRepo(it)
-                            }
-                            releaseConsole()
-                            MainHandler.runOnMain(Runnable {
-                                result.success("Delete all invalid file Finished.")
-                            })
-                        }
+    private fun cleaInvalidRepo(aty: Activity, result: MethodChannel.Result) {
+        SingleWorker.doSomething(Runnable {
+            try {
+                val list = FlutterModuleDbHelper.queryRepoList(aty)
+                val repoList = obtainRootDir(aty).listFiles()
+                Log.i(TAG, list.toString())
+                val deleteTargets = ArrayList<String>()
+                if (repoList == null) {
+                    MainHandler.runOnMain(Runnable {
+                        result.success(aty.resources.getString(R.string.noInvalidRepo))
                         releaseConsole()
-                    } catch (e: java.lang.Exception) {
-                        e.printStackTrace()
-                        result.success("Delete all invalid error:${e}")
-                        releaseConsole()
-                    } finally {
-                        releaseConsole()
+                    })
+                    return@Runnable
+                }
+                repoList.forEach {
+                    if (!list.contains(
+                            it.absolutePath.substring(
+                                it.absolutePath.lastIndexOf(
+                                    File.separator
+                                ) + 1, it.absolutePath.length
+                            )
+                        )
+                    ) {
+                        deleteTargets.add(it.absolutePath)
                     }
-                })
+                }
+                if (deleteTargets.isEmpty()) {
+                    MainHandler.runOnMain(Runnable {
+                        result.success(aty.resources.getString(R.string.noInvalidRepo))
+                    })
+                } else {
+                    //展示删除进度窗口
+                    createNewConsole(aty)
+                    deleteTargets.forEach {
+                        MainHandler.runOnMain(Runnable {
+                            progressConsole?.appendLine("start delete.")
+                        })
+                        deleteInvalidRepo(it)
+                    }
+                    releaseConsole()
+                    MainHandler.runOnMain(Runnable {
+                        result.success(aty.resources.getString(R.string.deleteInvalidFileFinished))
+                    })
+                }
+                releaseConsole()
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                result.success("error:${e}")
+                releaseConsole()
+            } finally {
+                releaseConsole()
             }
-        }
+        })
     }
+
 
     /**
      * 开始删除文件
@@ -1239,66 +1236,6 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 }
             }
         }
-    }
-
-    /**
-     * 直接克隆仓库，不需要鉴权，通讯数据是json字符串，字段如下
-     * String gitUrl, String localPath，String repoName
-     */
-    private fun cloneDirect(call: MethodCall, result: MethodChannel.Result) {
-//        call.arguments?.let {
-//            if (it is String) {
-//                val obj = JSONObject(it)
-//                val gitUri = obj.optString("gitUrl")
-//                val localPath = obj.optString("localPath")
-//                val repoName = obj.optString("repoName")
-//                Log.i(TAG, "localPath = $localPath")
-//                Log.i(TAG, "gitUrl = $gitUri")
-//                Log.i(TAG, "repoName = $repoName")
-//                cloneDirect(gitUri, localPath, repoName, result)
-//            }
-//        }
-    }
-
-    @Deprecated("暂时废弃")
-    private fun cloneDirect(
-        gitUri: String,
-        localPath: String,
-        repoName: String,
-        result: MethodChannel.Result
-    ) {
-        SingleWorker.doSomething(Runnable {
-            Log.i(TAG, "开始clone")
-            val git =
-                GitUtil.cloneDirect(
-                    gitUri,
-                    localPath,
-                    repoName,
-                    object : CloneCommand.Callback {
-                        override fun checkingOut(commit: AnyObjectId?, path: String?) {
-                            Log.w(TAG, "checkingOut:path =$path")
-                            Log.w(TAG, "checkingOut:commit  = $commit")
-                        }
-
-                        override fun initializedSubmodules(submodules: MutableCollection<String>?) {
-                            Log.w(TAG, "initializedSubmodules:submodules =$submodules")
-                        }
-
-                        override fun cloningSubmodule(path: String?) {
-                            Log.w(TAG, "cloningSubmodule:path =$path")
-                        }
-                    },
-                    obtainProgressMonitor("Cloning into '$repoName'")
-                )
-            git?.let {
-                git.close()
-                MainHandler.runOnMain(Runnable { result.success("success") })
-            } ?: run {
-                Log.e(TAG, "clone失败，创建文件夹失败")
-                MainHandler.runOnMain(Runnable { result.success("failure") })
-            }
-            releaseConsole()
-        })
     }
 
     /**

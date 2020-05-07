@@ -46,8 +46,8 @@ class _SettingState extends State<SettingPage> {
                   children: <Widget>[
                     _buildLanguageCode(),
                     _buildDivider(),
-                    _buildCleanInvalidRepo(),
-                    _buildDivider(),
+//                    _buildCleanInvalidRepo(),
+//                    _buildDivider(),
                     _buildManageRepo(),
                     _buildDivider(),
                     _buildLogListEntrance(),

@@ -11,6 +11,7 @@ import 'package:wreader_flutter_module/widget/common_decoration.dart';
 import 'package:wreader_flutter_module/widget/common_styles.dart';
 import 'package:wreader_flutter_module/widget/common_widgets.dart';
 import 'package:wreader_flutter_module/widget/ez_app_bar.dart';
+import 'package:wreader_flutter_module/widget/ez_selector.dart';
 
 import 'state.dart';
 
@@ -18,7 +19,31 @@ Widget buildView(
     ManageGitRepoState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     appBar: EzAppBar.buildCenterTitleAppBar(
-        StrsManageRepo.title(), viewService.context),
+        StrsManageRepo.title(), viewService.context,
+        actions: <Widget>[
+          SizedBox(
+            height: 98.px2Dp,
+            child: EzSelector(
+              Padding(
+                padding: EdgeInsets.only(left: 20.px2Dp, right: 20.px2Dp),
+                child: Image.asset(
+                  'assets/images/icon_delete.png',
+                  width: 38.px2Dp,
+                  height: 38.px2Dp,
+                ),
+              ),
+              () {
+                TransBridgeChannel.clearInvalidRepo().then((_) {
+                  if (_ != null && _.isNotEmpty) {
+                    TransBridgeChannel.showToast(_);
+                  }
+                });
+              },
+              defaultColor: Colors.transparent,
+              pressColor: AppColors.COLOR_TRANS_20,
+            ),
+          )
+        ]),
     body: state.isLoading
         ? CommonWidgets.buildLoadingPage()
         : _buildContent(state, dispatch, viewService),

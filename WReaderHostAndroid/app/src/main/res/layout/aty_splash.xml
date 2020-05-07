@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,10 +12,10 @@
         android:gravity="center"
         android:lineSpacingExtra="@dimen/px10"
         android:paddingBottom="@dimen/px60"
-        android:text="@string/splash"
         android:textColor="#eeffffff"
         android:textSize="@dimen/tsBig"
+        android:textStyle="bold"
         android:visibility="gone"
-        android:textStyle="bold" />
+        tools:visibility="visible" />
 
 </merge>

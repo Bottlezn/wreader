@@ -13,4 +13,6 @@
     <string name="cloneHint">请不要锁屏或切换App,避免连接中断导致失败,如果有 Clone 失败的工程可以到设置页面清空.</string>
     <string name="logingFailure">记录日志失败</string>
     <string name="logingIn">日志被记录到</string>
+    <string name="noInvalidRepo">没有无效仓库哦！</string>
+    <string name="deleteInvalidFileFinished">删除失效文件结束。</string>
 </resources>

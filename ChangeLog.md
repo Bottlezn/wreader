@@ -28,3 +28,9 @@ private static ConcurrentHashMap<String, FilterCommandFactory> filterCommandRegi
 private static Map<String, FilterCommandFactory> filterCommandRegistry = new ConcurrentHashMap();
 ```
 
+### v0.3 
+[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.3_release.apk)  
+
+1. **Optimize language switching performance.**  
+2. Fix bugs that have been found.
+
