@@ -1,6 +1,6 @@
 ## ChangeLog
 
-[last APK](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/last/wreader_release.apk)  
+[last APK](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/lastRelease/DownloadUrl.md)  
 
 ### v0.1
 
