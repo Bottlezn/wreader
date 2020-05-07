@@ -52,38 +52,45 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         Log.e(TAG, "call.method = ${call.method}")
-        when (call.method) {
-            ChannelIncomingMethod.GET_GIT_ROOT_PATH -> getGitLocalRootPath(result)
+        externalHelper?.canNext()?.let { aty ->
+            when (call.method) {
 //            ChannelIncomingMethod.CLONE_DIRECT -> cloneDirect(call, result)
-            ChannelIncomingMethod.CLONE_USE_ACCOUNT_AND_PWD -> cloneUseAccountAndPwd(call, result)
-            ChannelIncomingMethod.CLONE_USE_KEY_PAIR -> cloneUseKeyPair(call, result)
-            ChannelIncomingMethod.SWITCH_NEW_BRANCH -> switchNewBranch(call, result)
-            ChannelIncomingMethod.SWITCH_EXISTED_BRANCH -> switchExistedBranch(call, result)
-            ChannelIncomingMethod.PULL -> pull(call, result)
-            ChannelIncomingMethod.RESET -> reset(call, result)
-            ChannelIncomingMethod.FETCH -> fetch(call, result)
-            ChannelIncomingMethod.GET_ALL_BRANCH -> getAllBranchInfo(call, result)
-            ChannelIncomingMethod.CHECK_GIT_EXISTS -> checkGitRepoExists(call, result)
-            ChannelIncomingMethod.GET_GIT_REPO_CONFIG_FILE -> getGitConfFile(call, result)
-            ChannelIncomingMethod.SHOW_TOAST -> showToast(call, result)
-            ChannelIncomingMethod.READ_CODE_FILE,
-            ChannelIncomingMethod.READ_MD_FILE -> readTextFile(call, result)
-            ChannelIncomingMethod.BROWSE_IMAGE -> browseImage(call, result)
-            ChannelIncomingMethod.OPEN_FILE_USE_OTHER_APP -> openFileUseOtherApp(call, result)
-            ChannelIncomingMethod.CLEAR_INVALID_REPO -> cleaInvalidRepo(call, result)
-            ChannelIncomingMethod.CLEAR_SPECIFIED_REPO -> cleanSpecifiedRepo(call, result)
-            ChannelIncomingMethod.GOTO_HOME -> gotoHome(result)
-            ChannelIncomingMethod.GET_VERSION_INFO -> getVersionInfo(result)
-            ChannelIncomingMethod.REPORT_FLUTTER_ERROR -> catchError(call, result)
-            ChannelIncomingMethod.SWITCH_LANGUAGE -> switchLanguage(call, result)
-            ChannelIncomingMethod.GET_LOG_DIR -> getLogDir(result)
-            ChannelIncomingMethod.EXIT_APP -> exitApp()
-            ChannelIncomingMethod.GET_EXPORT_EXTERNAL_PATH -> getExportExternalPath(result)
-            ChannelIncomingMethod.GET_TAG_LIST -> getTagList(call, result)
-            ChannelIncomingMethod.CHECK_OUT_TAG -> checkoutTag(call, result)
-            ChannelIncomingMethod.OPEN_URL -> jumpOtherWebSite(call.arguments as String, result)
-            else -> result.success("method not implemented!")
+                ChannelIncomingMethod.GET_GIT_ROOT_PATH -> getGitLocalRootPath(result)
+                ChannelIncomingMethod.CLONE_USE_ACCOUNT_AND_PWD -> cloneUseAccountAndPwd(
+                    aty,
+                    call,
+                    result
+                )
+                ChannelIncomingMethod.CLONE_USE_KEY_PAIR -> cloneUseKeyPair(aty, call, result)
+                ChannelIncomingMethod.SWITCH_NEW_BRANCH -> switchNewBranch(call, result)
+                ChannelIncomingMethod.SWITCH_EXISTED_BRANCH -> switchExistedBranch(call, result)
+                ChannelIncomingMethod.PULL -> pull(call, result)
+                ChannelIncomingMethod.RESET -> reset(call, result)
+                ChannelIncomingMethod.FETCH -> fetch(call, result)
+                ChannelIncomingMethod.GET_ALL_BRANCH -> getAllBranchInfo(call, result)
+                ChannelIncomingMethod.CHECK_GIT_EXISTS -> checkGitRepoExists(call, result)
+                ChannelIncomingMethod.GET_GIT_REPO_CONFIG_FILE -> getGitConfFile(call, result)
+                ChannelIncomingMethod.SHOW_TOAST -> showToast(call, result)
+                ChannelIncomingMethod.READ_CODE_FILE,
+                ChannelIncomingMethod.READ_MD_FILE -> readTextFile(call, result)
+                ChannelIncomingMethod.BROWSE_IMAGE -> browseImage(call, result)
+                ChannelIncomingMethod.OPEN_FILE_USE_OTHER_APP -> openFileUseOtherApp(call, result)
+                ChannelIncomingMethod.CLEAR_INVALID_REPO -> cleaInvalidRepo(call, result)
+                ChannelIncomingMethod.CLEAR_SPECIFIED_REPO -> cleanSpecifiedRepo(call, result)
+                ChannelIncomingMethod.GOTO_HOME -> gotoHome(result)
+                ChannelIncomingMethod.GET_VERSION_INFO -> getVersionInfo(result)
+                ChannelIncomingMethod.REPORT_FLUTTER_ERROR -> catchError(call, result)
+                ChannelIncomingMethod.SWITCH_LANGUAGE -> switchLanguage(call, result)
+                ChannelIncomingMethod.GET_LOG_DIR -> getLogDir(result)
+                ChannelIncomingMethod.EXIT_APP -> exitApp()
+                ChannelIncomingMethod.GET_EXPORT_EXTERNAL_PATH -> getExportExternalPath(result)
+                ChannelIncomingMethod.GET_TAG_LIST -> getTagList(call, result)
+                ChannelIncomingMethod.CHECK_OUT_TAG -> checkoutTag(call, result)
+                ChannelIncomingMethod.OPEN_URL -> jumpOtherWebSite(call.arguments as String, result)
+                else -> result.success("method not implemented!")
+            }
         }
+
     }
 
     /**
@@ -103,125 +110,113 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     }
 
     private fun switchExistedBranch(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
-                    try {
-                        Log.w(TAG, call.arguments as String)
-                        val obj = JSONObject(call.arguments as String)
-                        val realFullBranchName = obj.optString("branchFullName")
-                        Log.e(TAG, "realFullBranchName = $realFullBranchName")
-                        val fullBranchName =
-                            if (realFullBranchName.contains("\n")) realFullBranchName.substring(
-                                0,
-                                realFullBranchName.indexOf("\n")
-                            ) else realFullBranchName
-                        Log.w(TAG, "fullBranchName = $fullBranchName")
-                        val bean = GsonUtil.json2bean<RepoDetailsBean>(
-                            obj.optString("repoDetails"),
-                            RepoDetailsBean::class.java
-                        )
-                        GitUtil.switchExistedBranch(
-                            fullBranchName, bean,
-                            obtainProgressMonitor("Begin checkout branch.")
-                        ).let { info ->
+        SingleWorker.doSomething(Runnable {
+            try {
+                Log.w(TAG, call.arguments as String)
+                val obj = JSONObject(call.arguments as String)
+                val realFullBranchName = obj.optString("branchFullName")
+                Log.e(TAG, "realFullBranchName = $realFullBranchName")
+                val fullBranchName =
+                    if (realFullBranchName.contains("\n")) realFullBranchName.substring(
+                        0,
+                        realFullBranchName.indexOf("\n")
+                    ) else realFullBranchName
+                Log.w(TAG, "fullBranchName = $fullBranchName")
+                val bean = GsonUtil.json2bean<RepoDetailsBean>(
+                    obj.optString("repoDetails"),
+                    RepoDetailsBean::class.java
+                )
+                GitUtil.switchExistedBranch(
+                    fullBranchName, bean,
+                    obtainProgressMonitor("Begin checkout branch.")
+                ).let { info ->
 
-                            MainHandler.runOnMain(Runnable {
-                                result.success(GsonUtil.bean2json(info))
-                            })
-                            return@Runnable
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        MainHandler.runOnMain(Runnable {
-                            result.success(
-                                GsonUtil.bean2json(
-                                    SwitchBranchResult("fail", null)
-                                )
-                            )
-                        })
-                        return@Runnable
-                    } finally {
-                        releaseConsole()
-                    }
+                    MainHandler.runOnMain(Runnable {
+                        result.success(GsonUtil.bean2json(info))
+                    })
+                    return@Runnable
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                MainHandler.runOnMain(Runnable {
+                    result.success(
+                        GsonUtil.bean2json(
+                            SwitchBranchResult("fail", null)
+                        )
+                    )
                 })
+                return@Runnable
+            } finally {
+                releaseConsole()
             }
-        }
+        })
     }
 
     private fun checkoutTag(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
-                    call.arguments?.let { arg ->
-                        Log.w(TAG, "arg$arg")
-                        val obj = JSONObject(arg as String)
-                        val realFullBranchName = obj.optString("fullTagName")
-                        Log.i(TAG, "realFullBranchName = $realFullBranchName")
-                        val bean = GsonUtil.json2bean<RepoDetailsBean>(
-                            obj.optString("repoDetails"),
-                            RepoDetailsBean::class.java
-                        )
-                        try {
-                            GitUtil.checkoutTag(
-                                realFullBranchName,
-                                bean,
-                                obtainProgressMonitor("Begin checkout tag :$realFullBranchName")
-                            )?.let { branch ->
-                                MainHandler.runOnMain(Runnable {
-                                    result.success(
-                                        GsonUtil.bean2json(
-                                            SwitchBranchResult("success", branch)
-                                        )
-                                    )
-                                })
-                            } ?: kotlin.run {
-                                MainHandler.runOnMain(Runnable {
-                                    GsonUtil.bean2json(
-                                        SwitchBranchResult("fail", null)
-                                    )
-                                })
-                            }
-
-                        } catch (e: java.lang.Exception) {
-                            e.printStackTrace()
-                            MainHandler.runOnMain(Runnable {
+        SingleWorker.doSomething(Runnable {
+            call.arguments?.let { arg ->
+                Log.w(TAG, "arg$arg")
+                val obj = JSONObject(arg as String)
+                val realFullBranchName = obj.optString("fullTagName")
+                Log.i(TAG, "realFullBranchName = $realFullBranchName")
+                val bean = GsonUtil.json2bean<RepoDetailsBean>(
+                    obj.optString("repoDetails"),
+                    RepoDetailsBean::class.java
+                )
+                try {
+                    GitUtil.checkoutTag(
+                        realFullBranchName,
+                        bean,
+                        obtainProgressMonitor("Begin checkout tag :$realFullBranchName")
+                    )?.let { branch ->
+                        MainHandler.runOnMain(Runnable {
+                            result.success(
                                 GsonUtil.bean2json(
-                                    SwitchBranchResult("fail", null, additionalInfo = e.message)
+                                    SwitchBranchResult("success", branch)
                                 )
-                            })
-                        } finally {
-                            releaseConsole()
-                        }
+                            )
+                        })
+                    } ?: kotlin.run {
+                        MainHandler.runOnMain(Runnable {
+                            GsonUtil.bean2json(
+                                SwitchBranchResult("fail", null)
+                            )
+                        })
                     }
-                })
+
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                    MainHandler.runOnMain(Runnable {
+                        GsonUtil.bean2json(
+                            SwitchBranchResult("fail", null, additionalInfo = e.message)
+                        )
+                    })
+                } finally {
+                    releaseConsole()
+                }
             }
-        }
+        })
     }
 
     private fun getTagList(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
-                    call.arguments?.let { arg ->
-                        val obj = JSONObject((arg as String))
-                        val gitRepoLocalDir = obj.optString("gitRepoLocalDir")
-                        val refs = GitUtil.getTagList(gitRepoLocalDir)
-                        val list = ArrayList<String>()
-                        refs?.forEach {
-                            list.add(it.name)
-                        }
-                        MainHandler.runOnMain(Runnable {
-                            result.success(GsonUtil.bean2json(AllTagResult("success", list)))
-                        })
-                        return@Runnable
-                    }
-                    MainHandler.runOnMain(Runnable {
-                        result.success(GsonUtil.bean2json(AllTagResult("fail", null)))
-                    })
+        SingleWorker.doSomething(Runnable {
+            call.arguments?.let { arg ->
+                val obj = JSONObject((arg as String))
+                val gitRepoLocalDir = obj.optString("gitRepoLocalDir")
+                val refs = GitUtil.getTagList(gitRepoLocalDir)
+                val list = ArrayList<String>()
+                refs?.forEach {
+                    list.add(it.name)
+                }
+                MainHandler.runOnMain(Runnable {
+                    result.success(GsonUtil.bean2json(AllTagResult("success", list)))
                 })
+                return@Runnable
             }
-        }
+            MainHandler.runOnMain(Runnable {
+                result.success(GsonUtil.bean2json(AllTagResult("fail", null)))
+            })
+        })
     }
 
     /**
@@ -324,7 +319,16 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 } ?: run {
                     SystemLanguageHelper.switchLanguage(aty, null)
                 }
-                result.success(null)
+//                result.success(null)
+                aty.finish()
+                FlutterModuleDbHelper.getEnvironmentConf(WReaderApp.getApp())
+                    .let { conf ->
+                        FlutterMainAty.startReading(
+                            WReaderApp.getApp(),
+                            conf[FlutterModuleDbConst.BRIGHTNESS_MODE] as? Int?,
+                            conf[FlutterModuleDbConst.LANGUAGE_CODE] as? String?
+                        )
+                    }
             }
         }
     }
@@ -787,112 +791,100 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 拉取最新代码
      */
     private fun pull(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
-                    try {
-                        val obj = JSONObject(call.arguments as String)
-                        val bean = GsonUtil.json2bean<RepoDetailsBean>(
-                            obj.optString("repoDetails"),
-                            RepoDetailsBean::class.java
-                        )
-                        val pullResult = GitUtil.pull(bean, obtainProgressMonitor("begin pull"))
-                        Log.d(TAG, "pullResult = $pullResult")
-                        MainHandler.runOnMain(Runnable {
-                            result.success(GsonUtil.bean2json(pullResult))
-                        })
-                        return@Runnable
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        MainHandler.runOnMain(Runnable {
-                            result.success(
-                                GsonUtil.bean2json(
-                                    PullResult("fail", e.toString())
-                                )
-                            )
-                        })
-                        return@Runnable
-                    } finally {
-                        releaseConsole()
-                    }
+        SingleWorker.doSomething(Runnable {
+            try {
+                val obj = JSONObject(call.arguments as String)
+                val bean = GsonUtil.json2bean<RepoDetailsBean>(
+                    obj.optString("repoDetails"),
+                    RepoDetailsBean::class.java
+                )
+                val pullResult = GitUtil.pull(bean, obtainProgressMonitor("begin pull"))
+                Log.d(TAG, "pullResult = $pullResult")
+                MainHandler.runOnMain(Runnable {
+                    result.success(GsonUtil.bean2json(pullResult))
                 })
+                return@Runnable
+            } catch (e: Exception) {
+                e.printStackTrace()
+                MainHandler.runOnMain(Runnable {
+                    result.success(
+                        GsonUtil.bean2json(
+                            PullResult("fail", e.toString())
+                        )
+                    )
+                })
+                return@Runnable
+            } finally {
+                releaseConsole()
             }
-        }
+        })
     }
 
     /**
      * 切换分支
      */
     private fun switchNewBranch(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
-                    try {
-                        Log.w(TAG, call.arguments as String)
-                        val obj = JSONObject(call.arguments as String)
-                        val realFullBranchName = obj.optString("branchFullName")
-                        Log.e(TAG, "realFullBranchName = $realFullBranchName")
-                        val fullBranchName =
-                            if (realFullBranchName.contains("\n")) realFullBranchName.substring(
-                                0,
-                                realFullBranchName.indexOf("\n")
-                            ) else realFullBranchName
-                        Log.w(TAG, "fullBranchName = $fullBranchName")
-                        val bean = GsonUtil.json2bean<RepoDetailsBean>(
-                            obj.optString("repoDetails"),
-                            RepoDetailsBean::class.java
-                        )
-                        GitUtil.switchNewBranch(
-                            fullBranchName, bean,
-                            obtainProgressMonitor("Begin checkout branch.")
-                        ).let { info ->
+        SingleWorker.doSomething(Runnable {
+            try {
+                Log.w(TAG, call.arguments as String)
+                val obj = JSONObject(call.arguments as String)
+                val realFullBranchName = obj.optString("branchFullName")
+                Log.e(TAG, "realFullBranchName = $realFullBranchName")
+                val fullBranchName =
+                    if (realFullBranchName.contains("\n")) realFullBranchName.substring(
+                        0,
+                        realFullBranchName.indexOf("\n")
+                    ) else realFullBranchName
+                Log.w(TAG, "fullBranchName = $fullBranchName")
+                val bean = GsonUtil.json2bean<RepoDetailsBean>(
+                    obj.optString("repoDetails"),
+                    RepoDetailsBean::class.java
+                )
+                GitUtil.switchNewBranch(
+                    fullBranchName, bean,
+                    obtainProgressMonitor("Begin checkout branch.")
+                ).let { info ->
 
-                            MainHandler.runOnMain(Runnable {
-                                result.success(GsonUtil.bean2json(info))
-                            })
-                            return@Runnable
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        MainHandler.runOnMain(Runnable {
-                            result.success(
-                                GsonUtil.bean2json(
-                                    SwitchBranchResult("fail", null)
-                                )
-                            )
-                        })
-                        return@Runnable
-                    } finally {
-                        releaseConsole()
-                    }
+                    MainHandler.runOnMain(Runnable {
+                        result.success(GsonUtil.bean2json(info))
+                    })
+                    return@Runnable
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                MainHandler.runOnMain(Runnable {
+                    result.success(
+                        GsonUtil.bean2json(
+                            SwitchBranchResult("fail", null)
+                        )
+                    )
                 })
+                return@Runnable
+            } finally {
+                releaseConsole()
             }
-        }
+        })
     }
 
     /**
      * 获取所有分支信息
      */
     private fun getAllBranchInfo(call: MethodCall, result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                call.arguments?.let { arg ->
-                    val obj = JSONObject((arg as String))
-                    val gitRepoLocalDir = obj.optString("gitRepoLocalDir")
-                    val git = Git.open(File(gitRepoLocalDir))
-                    val list =
-                        git.branchList().setListMode(ListBranchCommand.ListMode.ALL).call()
-                    val refStrs = ArrayList<String>(list.size)
-                    list.forEach { ref ->
-                        refStrs.add(ref.name)
-                    }
-                    git.close()
-                    result.success(GsonUtil.bean2json(AllBranchResult("success", refStrs)))
-                    return
-                }
-                result.success(GsonUtil.bean2json(AllBranchResult("fail", null)))
+        call.arguments?.let { arg ->
+            val obj = JSONObject((arg as String))
+            val gitRepoLocalDir = obj.optString("gitRepoLocalDir")
+            val git = Git.open(File(gitRepoLocalDir))
+            val list =
+                git.branchList().setListMode(ListBranchCommand.ListMode.ALL).call()
+            val refStrs = ArrayList<String>(list.size)
+            list.forEach { ref ->
+                refStrs.add(ref.name)
             }
+            git.close()
+            result.success(GsonUtil.bean2json(AllBranchResult("success", refStrs)))
+            return
         }
+        result.success(GsonUtil.bean2json(AllBranchResult("fail", null)))
     }
 
     /**
@@ -988,7 +980,11 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 使用账号密码clone
      * String gitUrl, String localPath，String repoName,String account,String pwd
      */
-    private fun cloneUseAccountAndPwd(call: MethodCall, result: MethodChannel.Result) {
+    private fun cloneUseAccountAndPwd(
+        aty: Activity,
+        call: MethodCall,
+        result: MethodChannel.Result
+    ) {
         call.arguments?.let {
             if (it is String) {
                 val obj = JSONObject(it)
@@ -1003,6 +999,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 Log.i(TAG, "account = $account")
                 Log.i(TAG, "pwd = $pwd")
                 cloneUseAccountAndPwd(
+                    aty,
                     gitUri,
                     localPath,
                     repoName,
@@ -1019,6 +1016,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * String gitUrl, String localPath，String repoName,String account,String pwd
      */
     private fun cloneUseAccountAndPwd(
+        aty: Activity,
         gitUri: String,
         localPath: String,
         repoName: String,
@@ -1037,7 +1035,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         account,
                         pwd,
                         null,
-                        obtainProgressMonitor("${WReaderApp.getApp().resources.getString(R.string.cloneHint)}\nCloning into '$repoName'")
+                        obtainProgressMonitor("${aty.resources.getString(R.string.cloneHint)}\nCloning into '$repoName'")
                     )
                 git?.let {
                     val currentBranch = git.repository.fullBranch
@@ -1092,7 +1090,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 使用rsa 密钥对clone
      * String gitUrl, String localPath，String repoName,String priKey,String pubKey,String priKeyPass
      */
-    private fun cloneUseKeyPair(call: MethodCall, result: MethodChannel.Result) {
+    private fun cloneUseKeyPair(aty: Activity, call: MethodCall, result: MethodChannel.Result) {
         call.arguments?.let {
             if (it is String) {
                 val obj = JSONObject(it)
@@ -1109,6 +1107,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 Log.i(TAG, "pubKey = $pubKey")
                 Log.i(TAG, "priKeyPass = $priKeyPass")
                 cloneUseKeyPair(
+                    aty,
                     gitUri,
                     localPath,
                     repoName,
@@ -1122,6 +1121,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     }
 
     private fun cloneUseKeyPair(
+        aty: Activity,
         uri: String,
         localPath: String,
         localRepoName: String,
@@ -1142,7 +1142,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         pubKey,
                         password,
                         null,
-                        obtainProgressMonitor("${WReaderApp.getApp().resources.getString(R.string.cloneHint)}\nCloning into '$localRepoName'")
+                        obtainProgressMonitor("${aty.resources.getString(R.string.cloneHint)}\nCloning into '$localRepoName'")
                     )
                 git?.let {
                     val currentBranch = git.repository.fullBranch
@@ -1305,14 +1305,9 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 获取git的本地存放地址
      */
     private fun getGitLocalRootPath(result: MethodChannel.Result) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                //不使用SD卡的路径，避免Git仓库的数据被不小心改动到
-                //因为本软件原则上只读，不提供编辑功能
-                obtainContextFileDir(result)
-            }
-        }
-
+        //不使用SD卡的路径，避免Git仓库的数据被不小心改动到
+        //因为本软件原则上只读，不提供编辑功能
+        obtainContextFileDir(result)
     }
 
     private fun obtainRootDir(aty: Activity) =

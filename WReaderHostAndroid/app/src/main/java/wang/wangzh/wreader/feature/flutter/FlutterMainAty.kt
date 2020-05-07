@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -13,12 +14,14 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry
 import io.flutter.plugin.common.MethodChannel
 import wang.wangzh.wreader.R
+import wang.wangzh.wreader.WReaderApp
 import wang.wangzh.wreader.consts.CHANNEL_TRANS_BRIDGE
 import wang.wangzh.wreader.consts.FlutterModuleDbConst
 import wang.wangzh.wreader.feature.flutter.WReaderMethodCallHandler.Companion.GET_GIT_CONF_FILE
 import wang.wangzh.wreader.feature.flutter.protocol.ApplyStorageCallback
 import wang.wangzh.wreader.feature.flutter.protocol.IExternalMethodCallHelper
 import wang.wangzh.wreader.utils.PathUtil
+import wang.wangzh.wreader.utils.SystemLanguageHelper
 
 
 /**
@@ -57,9 +60,27 @@ class FlutterMainAty : FlutterActivity(), IExternalMethodCallHelper {
      */
     private var methodCallHandler: WReaderMethodCallHandler? = null
 
+    override fun attachBaseContext(newBase: Context) {
+        WReaderApp.currentLocal?.let { locale ->
+            super.attachBaseContext(
+                SystemLanguageHelper.switchLanguage(
+                    newBase,
+                    SystemLanguageHelper.getLocaleCode(locale)
+                )
+            )
+        } ?: run {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initChannel()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        Log.i(TAG, newConfig?.toString())
     }
 
     fun checkWriteExternalStorage() {

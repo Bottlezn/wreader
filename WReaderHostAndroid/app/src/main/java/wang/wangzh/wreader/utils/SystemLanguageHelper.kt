@@ -1,6 +1,9 @@
 package wang.wangzh.wreader.utils
 
 import android.content.Context
+import android.os.Build
+import android.os.LocaleList
+import android.util.Log
 import wang.wangzh.wreader.WReaderApp
 import wang.wangzh.wreader.consts.FlutterModuleDbConst
 import java.util.*
@@ -12,28 +15,57 @@ import java.util.*
  */
 object SystemLanguageHelper {
 
-    fun switchLanguage(context: Context, code: String?) {
+    private const val TAG = "SystemLanguageHelper"
+
+    fun getLocaleCode(locale: Locale): String {
+        return "${locale.language}${if (locale.country.isNullOrBlank()) {
+            ""
+        } else "_${locale.country}"
+        }"
+    }
+
+    fun switchLanguage(context: Context, code: String?): Context {
         val conf = context.resources.configuration
-        val country = WReaderApp.initLocalCode ?: Locale.getDefault().country
-        if (code == null || FlutterModuleDbConst.FOLLOW_SYSTEM == code) {
-            //跟随系统，不需要修改
-            if ("CN" == country) {
-                conf.setLocale(Locale.SIMPLIFIED_CHINESE)
-            } else {
-                conf.setLocale(Locale.ENGLISH)
-            }
-        } else if (FlutterModuleDbConst.EN_US == code) {
-            conf.setLocale(Locale.ENGLISH)
-        } else if (FlutterModuleDbConst.ZH_CN == code) {
-            conf.setLocale(Locale.SIMPLIFIED_CHINESE)
+        val defaultLocal = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.resources.configuration.locales.get(0)
         } else {
-            //跟随系统，不需要修改
-            if ("CN" == country) {
-                conf.setLocale(Locale.SIMPLIFIED_CHINESE)
-            } else {
-                conf.setLocale(Locale.ENGLISH)
-            }
+            context.resources.configuration.locale
         }
+        Log.i(TAG, "code = $code")
+        Log.i(TAG, "defaultLocal = ${getLocaleCode(defaultLocal)}")
+        //当前环境中根据用户上次选择的语言选项
+        val currentLocale = WReaderApp.deviceInitLocale ?: defaultLocal
+        val selectLocale: Locale =
+            if (FlutterModuleDbConst.EN_US == code) {
+                Locale.US
+            } else if (FlutterModuleDbConst.ZH_CN == code) {
+                Locale.SIMPLIFIED_CHINESE
+            } else {
+                //code 为空，跟随系统，不需要修改
+                if (FlutterModuleDbConst.ZH_CN == getLocaleCode(currentLocale)) {
+                    Locale.SIMPLIFIED_CHINESE
+                } else {
+                    Locale.US
+                }
+            }
+        Log.i(TAG, "currentLocale = ${getLocaleCode(currentLocale)}")
+        Log.i(TAG, "selectLocale = ${getLocaleCode(selectLocale)}")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val localeList = LocaleList.forLanguageTags(getLocaleCode(selectLocale))
+            LocaleList.setDefault(localeList)
+            conf.locales = localeList
+        } else {
+            conf.locale = selectLocale
+        }
+        WReaderApp.currentLocal = selectLocale
+        conf.locale = selectLocale
+        conf.setLocale(selectLocale)
+        val wrapper = context.createConfigurationContext(conf)
+        wrapper.resources.updateConfiguration(conf, context.resources.displayMetrics)
+        if (context !is WReaderApp) {
+            switchLanguage(WReaderApp.getApp(), code)
+        }
+        return wrapper
     }
 
 }
