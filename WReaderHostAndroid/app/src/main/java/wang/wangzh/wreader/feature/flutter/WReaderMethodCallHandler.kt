@@ -13,10 +13,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
-import org.eclipse.jgit.api.CloneCommand
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.api.ListBranchCommand
-import org.eclipse.jgit.lib.AnyObjectId
 import org.eclipse.jgit.lib.ProgressMonitor
 import org.json.JSONObject
 import wang.wangzh.wreader.R
@@ -54,7 +52,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
         Log.e(TAG, "call.method = ${call.method}")
         externalHelper?.canNext()?.let { aty ->
             when (call.method) {
-//            ChannelIncomingMethod.CLONE_DIRECT -> cloneDirect(call, result)
+                ChannelIncomingMethod.CLONE_DIRECT -> cloneDirect(aty, call, result)
                 ChannelIncomingMethod.GET_GIT_ROOT_PATH -> getGitLocalRootPath(result)
                 ChannelIncomingMethod.CLONE_USE_ACCOUNT_AND_PWD -> cloneUseAccountAndPwd(
                     aty,
@@ -90,7 +88,6 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 else -> result.success("method not implemented!")
             }
         }
-
     }
 
     /**
@@ -110,7 +107,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     }
 
     private fun switchExistedBranch(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 Log.w(TAG, call.arguments as String)
                 val obj = JSONObject(call.arguments as String)
@@ -153,7 +150,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     }
 
     private fun checkoutTag(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             call.arguments?.let { arg ->
                 Log.w(TAG, "arg$arg")
                 val obj = JSONObject(arg as String)
@@ -199,7 +196,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     }
 
     private fun getTagList(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             call.arguments?.let { arg ->
                 val obj = JSONObject((arg as String))
                 val gitRepoLocalDir = obj.optString("gitRepoLocalDir")
@@ -471,7 +468,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     private fun cleanSpecifiedRepo(call: MethodCall, result: MethodChannel.Result) {
         externalHelper?.canNext()?.let { aty ->
             if (!aty.isFinishing) {
-                SingleWorker.doSomething(Runnable {
+                Poor996Worker.doSomething(Runnable {
                     try {
                         if (call.arguments is String) {
                             val obj = JSONObject(call.arguments as String)
@@ -522,7 +519,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 清理那些clone失败的无效仓库
      */
     private fun cleaInvalidRepo(aty: Activity, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 val list = FlutterModuleDbHelper.queryRepoList(aty)
                 val repoList = obtainRootDir(aty).listFiles()
@@ -550,6 +547,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 if (deleteTargets.isEmpty()) {
                     MainHandler.runOnMain(Runnable {
                         result.success(aty.resources.getString(R.string.noInvalidRepo))
+                        releaseConsole()
                     })
                 } else {
                     //展示删除进度窗口
@@ -560,16 +558,20 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         })
                         deleteInvalidRepo(it)
                     }
-                    releaseConsole()
                     MainHandler.runOnMain(Runnable {
                         result.success(aty.resources.getString(R.string.deleteInvalidFileFinished))
+                        releaseConsole()
                     })
                 }
-                releaseConsole()
+                MainHandler.runOnMain(Runnable {
+                    releaseConsole()
+                })
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
                 result.success("error:${e}")
-                releaseConsole()
+                MainHandler.runOnMain(Runnable {
+                    releaseConsole()
+                })
             } finally {
                 releaseConsole()
             }
@@ -639,13 +641,15 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 返回文件选择结果
      */
     fun transGitConFilePath(path: String?) {
-        externalHelper?.canNext()?.let { aty ->
-            if (!aty.isFinishing) {
-                if (!path.isNullOrBlank()) {
-                    tmpResult?.success(path)
-                } else {
-                    tmpResult?.success(null)
-                }
+        externalHelper?.canNext()?.let {
+            if (path?.endsWith(".json") == false) {
+                Toast.makeText(it, "Illegal File Path:$path", Toast.LENGTH_LONG).show()
+                return@let
+            }
+            if (!path.isNullOrBlank()) {
+                tmpResult?.success(path)
+            } else {
+                tmpResult?.success("")
             }
         }
         tmpCall = null
@@ -675,7 +679,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                             if (applyResult) {
                                 gotoImportConf(aty, call, result)
                             } else {
-                                result.success(null)
+                                result.success("")
                             }
                         }
                     }, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -701,7 +705,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
     }
 
     private fun fetch(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 val obj = JSONObject(call.arguments as String)
                 val bean = GsonUtil.json2bean<RepoDetailsBean>(
@@ -732,7 +736,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 重置当前分支到HEAD
      */
     private fun reset(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 val obj = JSONObject(call.arguments as String)
                 val bean = GsonUtil.json2bean<RepoDetailsBean>(
@@ -788,7 +792,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 拉取最新代码
      */
     private fun pull(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 val obj = JSONObject(call.arguments as String)
                 val bean = GsonUtil.json2bean<RepoDetailsBean>(
@@ -821,7 +825,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
      * 切换分支
      */
     private fun switchNewBranch(call: MethodCall, result: MethodChannel.Result) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 Log.w(TAG, call.arguments as String)
                 val obj = JSONObject(call.arguments as String)
@@ -974,6 +978,72 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
 
 
     /**
+     * 支持 clone 项目， 不需要鉴权，只支持 https:// 或 http:// 协议
+     */
+    private fun cloneDirect(aty: Activity, call: MethodCall, result: MethodChannel.Result) {
+        call.arguments?.let {
+            if (it is String) {
+                val obj = JSONObject(it)
+                val gitUri = obj.optString("gitUrl")
+                val localPath = obj.optString("localPath")
+                val repoName = obj.optString("repoName")
+                Log.i(TAG, "localPath = $localPath")
+                Log.i(TAG, "gitUrl = $gitUri")
+                Log.i(TAG, "repoName = $repoName")
+                Poor996Worker.doSomething(Runnable {
+                    try {
+                        GitUtil.cloneDirect(
+                            gitUri,
+                            localPath,
+                            repoName,
+                            obtainProgressMonitor(aty.resources.getString(R.string.cloneHint))
+                        )?.let { git ->
+                            val currentBranch = git.repository.fullBranch
+                            git.close()
+                            MainHandler.runOnMain(Runnable {
+                                result.success(
+                                    GsonUtil.bean2json(
+                                        CloneResult(
+                                            "success",
+                                            currentBranch
+                                        )
+                                    )
+                                )
+                            })
+                        } ?: run {
+                            MainHandler.runOnMain(Runnable {
+                                result.success(
+                                    GsonUtil.bean2json(
+                                        CloneResult(
+                                            "fail",
+                                            null
+                                        )
+                                    )
+                                )
+                            })
+                        }
+                    } catch (e: Throwable) {
+                        e.printStackTrace()
+                        MainHandler.runOnMain(Runnable {
+                            result.success(
+                                GsonUtil.bean2json(
+                                    CloneResult(
+                                        "fail:${e.message}",
+                                        null
+                                    )
+                                )
+                            )
+                        })
+                    } finally {
+                        releaseConsole()
+                    }
+                })
+            }
+        }
+    }
+
+
+    /**
      * 使用账号密码clone
      * String gitUrl, String localPath，String repoName,String account,String pwd
      */
@@ -1021,7 +1091,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
         pwd: String,
         result: MethodChannel.Result
     ) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             try {
                 Log.i(TAG, "开始clone")
                 val git =
@@ -1057,7 +1127,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         result.success(
                             GsonUtil.bean2json(
                                 CloneResult(
-                                    "fail",
+                                    "clone失败，创建文件夹失败",
                                     null
                                 )
                             )
@@ -1071,7 +1141,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                     result.success(
                         GsonUtil.bean2json(
                             CloneResult(
-                                "fail",
+                                e.toString(),
                                 null
                             )
                         )
@@ -1127,7 +1197,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
         password: String?,
         result: MethodChannel.Result
     ) {
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             Log.i(TAG, "开始clone")
             try {
                 val git =
@@ -1145,9 +1215,6 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                     val currentBranch = git.repository.fullBranch
                     val listBranchCommand =
                         git.branchList().setListMode(ListBranchCommand.ListMode.ALL)
-                    val ref = listBranchCommand.call()
-                    Log.i(TAG, ref.toString())
-                    Log.i(TAG, "ref.size = ${ref.size}")
                     git.close()
                     MainHandler.runOnMain(Runnable {
                         result.success(
@@ -1165,7 +1232,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         result.success(
                             GsonUtil.bean2json(
                                 CloneResult(
-                                    "fail",
+                                    "clone失败，创建文件夹失败",
                                     null
                                 )
                             )

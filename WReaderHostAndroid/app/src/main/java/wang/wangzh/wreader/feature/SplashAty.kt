@@ -13,7 +13,7 @@ import wang.wangzh.wreader.base.BaseAty
 import wang.wangzh.wreader.consts.FlutterModuleDbConst
 import wang.wangzh.wreader.db.FlutterModuleDbHelper
 import wang.wangzh.wreader.feature.flutter.FlutterMainAty
-import wang.wangzh.wreader.feature.flutter.SingleWorker
+import wang.wangzh.wreader.feature.flutter.Poor996Worker
 import wang.wangzh.wreader.utils.SystemLanguageHelper
 import java.util.*
 import kotlin.collections.HashMap
@@ -35,7 +35,7 @@ class SplashAty : BaseAty() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.aty_splash)
         val start = System.currentTimeMillis()
-        SingleWorker.doSomething(Runnable {
+        Poor996Worker.doSomething(Runnable {
             FlutterModuleDbHelper.getEnvironmentConf(this@SplashAty).let { conf ->
                 this@SplashAty.runOnUiThread {
                     val languageCode: String? = conf[FlutterModuleDbConst.LANGUAGE_CODE] as String?

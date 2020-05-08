@@ -33,13 +33,11 @@ object GitUtil {
         "STATUS was not clean,WReader dose not support edit operation!\nPlease choose reset current branch or cancel this operation!"
     private const val TAG_PREFIX = "fromTag/"
     private const val BRANCH_PREFIX = "fromBranch/"
-
-    @Deprecated("暂时不支持")
+    private const val TIME_OUT = 45 * 1000
     fun cloneDirect(
         uri: String,
         localPath: String,
         localRepoName: String,
-        callback: CloneCommand.Callback?,
         monitor: ProgressMonitor?
     ): Git? {
         val saveDir = File(localPath, localRepoName)
@@ -47,33 +45,16 @@ object GitUtil {
             return null
         }
         //设置clone文件的存放地址
-        return Git.cloneRepository().setBare(false).setCloneAllBranches(true).setDirectory(saveDir)
-            .setProgressMonitor(monitor).setTransportConfigCallback {
-                Log.e(TAG, "it  = ${it.javaClass.name}")
-                if (it is TransportGitSsh) {
-                    (it as TransportGitSsh).sshSessionFactory =
-                        object : JschConfigSessionFactory() {
-                            override fun configure(hc: OpenSshConfig.Host, session: Session) {
-                                //关闭严格模式，未知host照样使用
-                                session.setConfig(
-                                    SshConstants.STRICT_HOST_KEY_CHECKING,
-                                    SshConstants.NO
-                                )
-                                session.setConfig(
-                                    SshConstants.USER_KNOWN_HOSTS_FILE,
-                                    SshConstants.YES
-                                )
-                                session.setConfig(SshConstants.PREFERRED_AUTHENTICATIONS, "null")
-                                session.setPassword("")
-                                Log.e(TAG, "hc  = $hc")
-                                hc.preferredAuthentications
-                                Log.e(TAG, "session  = $session")
-                            }
-                        }
-                }
-            }
-            .setURI(uri).setCredentialsProvider(UsernamePasswordCredentialsProvider("", ""))
-            .setCallback(callback).call()
+        val git =
+            Git.cloneRepository().setBare(false).setCloneAllBranches(true).setDirectory(saveDir)
+                .setTimeout(TIME_OUT)
+                .setProgressMonitor(monitor)
+                .setURI(uri).setCredentialsProvider(UsernamePasswordCredentialsProvider("", ""))
+                .call()
+        //将 master 分支的名称修改为 "${BRANCH_PREFIX}master"
+        git.branchRename().setOldName("refs/heads/master").setNewName("${BRANCH_PREFIX}master")
+            .call()
+        return git
     }
 
     fun getTagList(
@@ -177,7 +158,7 @@ object GitUtil {
                 fetchCommand,
                 bean
             )
-            fetchCommand.call()
+            fetchCommand.setTimeout(TIME_OUT).call()
             git.close()
         }
     }
@@ -225,7 +206,7 @@ object GitUtil {
                         pwd
                     )
                 }
-                .setURI(uri)
+                .setURI(uri).setTimeout(TIME_OUT)
                 .setCredentialsProvider(UsernamePasswordCredentialsProvider(account, pwd))
                 .setCallback(callback).call()
         //将 master 分支的名称修改为 "${BRANCH_PREFIX}master"
@@ -259,7 +240,7 @@ object GitUtil {
                     bean,
                     git,
                     pullMonitor
-                ).call()
+                ).setTimeout(TIME_OUT).call()
                 return PullResult("success", "")
             }
         } catch (e: Exception) {
@@ -472,7 +453,7 @@ object GitUtil {
         }
         //设置clone文件的存放地址
         val clone = Git.cloneRepository()
-        clone.setDirectory(saveDir).setURI(uri).setProgressMonitor(monitor)
+        clone.setDirectory(saveDir).setURI(uri).setProgressMonitor(monitor).setTimeout(TIME_OUT)
             .setCloneAllBranches(true).setBare(false).setCallback(callback)
             .setTransportConfigCallback { transport ->
                 if (transport is SshTransport) {

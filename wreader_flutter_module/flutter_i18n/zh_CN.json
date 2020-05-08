@@ -30,7 +30,9 @@
     "inputKeyPassphrase": "(可选)私钥密码",
     "illegalGitUri": "非法的 git URI",
     "illegalAccountAndPwd": "账号和密码不能为空",
-    "illegalKeyPair": "密钥对字符串不能为空"
+    "illegalKeyPair": "密钥对字符串不能为空",
+    "gitTargetDirExisted": "git 仓库存放目录已存在，是否尝试清除无效仓库目录？",
+    "noAuthCloneUnSupport": "免鉴权 Clone 只支持 `http://xxx.git` 或 `http://xxx.git` 格式协议哦！"
   },
   "authenticationWay": {
     "way-0": "不需要鉴权，直接clone",

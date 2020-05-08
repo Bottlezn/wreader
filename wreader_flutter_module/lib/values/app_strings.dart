@@ -1,4 +1,4 @@
-import 'package:wreader_flutter_module/page/repo_conf/page_repo_conf.dart';
+import 'package:wreader_flutter_module/page/repo_conf/page.dart';
 import 'package:wreader_flutter_module/utils/common/flutter_i18n_helper.dart';
 
 /// HomePage 页面使用的字符串资源
@@ -28,7 +28,7 @@ class StrsHome {
   static String iKnow() => i18nTranslate('home.iKnow');
 }
 
-///[RepoConfPage]页面使用的字符串资源
+///[RepoConfigPage]页面使用的字符串资源
 class StrsRepoConf {
   static String title() => i18nTranslate('repoConf.title');
 
@@ -68,6 +68,9 @@ class StrsRepoConf {
       i18nTranslate('repoConf.illegalAccountAndPwd');
 
   static String illegalKeyPair() => i18nTranslate('repoConf.illegalKeyPair');
+
+  static String gitTargetDirExisted()=>i18nTranslate('repoConf.gitTargetDirExisted');
+  static String noAuthCloneUnSupport()=>i18nTranslate('repoConf.noAuthCloneUnSupport');
 }
 
 class StrsAuthenticationWay {

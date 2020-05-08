@@ -2,10 +2,19 @@
 
 [last APK](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/lastRelease/DownloadUrl.md)  
 
-### v0.1
+### v0.4
 
-**first version.**  
-[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.1_release.apk)  
+[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.4_release.apk)  
+
+1. **Support for cloning directly using the HTTP protocol.**
+2. Fix bugs that have been found.
+
+### v0.3 
+
+[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.3_release.apk)  
+
+1. **Optimize language switching performance.**  
+2. Fix bugs that have been found.
 
 ### v0.2
 
@@ -28,9 +37,9 @@ private static ConcurrentHashMap<String, FilterCommandFactory> filterCommandRegi
 private static Map<String, FilterCommandFactory> filterCommandRegistry = new ConcurrentHashMap();
 ```
 
-### v0.3 
-[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.3_release.apk)  
+### v0.1
 
-1. **Optimize language switching performance.**  
-2. Fix bugs that have been found.
+**first version.**  
+[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.1_release.apk)  
+
 

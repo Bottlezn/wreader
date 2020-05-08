@@ -30,7 +30,9 @@
     "inputKeyPassphrase": "(optional)private key's passphrase",
     "illegalGitUri": "Git uri can't be empty or have not end with '.git'!",
     "illegalAccountAndPwd": "Account and password cannot be empty!",
-    "illegalKeyPair": "PriKey and pubKey cannot be empty!"
+    "illegalKeyPair": "PriKey and pubKey cannot be empty!",
+    "gitTargetDirExisted": "The git repository directory already exists. Are you trying to clear the invalid repository directory?",
+    "noAuthCloneUnSupport": "Direct-Clone only supports' http://xxx.git 'or' http://xxx.git '."
   },
   "authenticationWay": {
     "way-0": "Don't need to authentication.",

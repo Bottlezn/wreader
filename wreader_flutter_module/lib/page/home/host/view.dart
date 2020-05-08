@@ -35,7 +35,8 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
     SizeUtil.init(viewService.context, 720.toDouble(), 1280.toDouble(), 5.0);
   }
   return WillPopScope(
-    key: Key("${state.isInit}"),
+    key: Key(
+        "${state.isInit}${state.repoList?.isEmpty}${state.readingRecord?.isEmpty}"),
     onWillPop: () {
       if (_lastBackTimestamp == -1) {
         _lastBackTimestamp = DateTime.now().millisecondsSinceEpoch;
@@ -512,7 +513,7 @@ Widget _appBar(HomeState state, BuildContext context) {
 ///根据查询到的内容,显示文本
 List<Widget> _obtainActions(HomeState state, BuildContext context) {
   List<Widget> list = List<Widget>();
-  if (state.readingRecord.isNotEmpty) {
+  if (state.repoList.isNotEmpty && state.readingRecord.isNotEmpty) {
     list.add(SizedBox(
       height: 98.px2Dp,
       child: EzSelector(

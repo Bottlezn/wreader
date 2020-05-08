@@ -6,7 +6,7 @@ import 'package:wreader_flutter_module/page/home/host/page.dart';
 import 'package:wreader_flutter_module/page/home/search_reading/page.dart';
 import 'package:wreader_flutter_module/page/log_list_page/log_list_page.dart';
 import 'package:wreader_flutter_module/page/manage_repo/page.dart';
-import 'package:wreader_flutter_module/page/repo_conf/page_repo_conf.dart';
+import 'package:wreader_flutter_module/page/repo_conf/page.dart';
 import 'package:wreader_flutter_module/page/repo_details/page.dart';
 import 'package:wreader_flutter_module/page/repo_details/search_file/page.dart';
 import 'package:wreader_flutter_module/page/repo_list/repo_list.dart';
@@ -59,7 +59,7 @@ var manageRepoHandler = Handler(
 ///仓库配置页面
 var repoConfHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> parameters) {
-  return RepoConfPage();
+  return RepoConfigPage().buildPage(null);
 });
 
 ///仓库列表页面
