@@ -2,6 +2,12 @@
 
 [last APK](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/lastRelease/DownloadUrl.md)  
 
+### v0.5
+
+[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.5_release.apk)  
+
+1. Fix bugs that have been found.
+
 ### v0.4
 
 [Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.4_release.apk)  

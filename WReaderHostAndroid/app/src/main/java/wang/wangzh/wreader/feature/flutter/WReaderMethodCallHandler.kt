@@ -477,6 +477,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                             if (length == 0) {
                                 MainHandler.runOnMain(Runnable {
                                     result.success("Specified repo was empty.")
+                                    releaseConsole()
                                 })
                             } else {
                                 //展示删除进度窗口
@@ -489,18 +490,23 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                                         })
                                         return@Runnable
                                     }
+                                    Log.i(
+                                        TAG,
+                                        "listJson.optString(index) = ${listJson.optString(index)}"
+                                    )
                                     deleteInvalidRepo(listJson.optString(index))
                                 }
                                 MainHandler.runOnMain(Runnable {
                                     result.success("success")
+                                    releaseConsole()
                                 })
                             }
                         } else {
                             MainHandler.runOnMain(Runnable {
                                 result.success("Illegal arguments.")
+                                releaseConsole()
                             })
                         }
-                        releaseConsole()
                     } catch (e: java.lang.Exception) {
                         e.printStackTrace()
                         MainHandler.runOnMain(Runnable {
@@ -588,15 +594,16 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
             if (it.isDirectory) {
                 deleteInvalidRepo(it.absolutePath)
             } else {
-                //删除的太快了，交互没有了
-                Thread.sleep(2)
+                Thread.sleep(1)
+                val deleted = it.delete()
                 MainHandler.runOnMain(Runnable {
-                    progressConsole?.appendLine("start delete ${it.absolutePath}:${it.delete()}")
+                    progressConsole?.appendLine("start delete ${it.absolutePath}:$deleted")
                 })
             }
         }
+        val deleted = file.delete()
         MainHandler.runOnMain(Runnable {
-            progressConsole?.appendLine("start delete ${dirPath}:${File(dirPath).delete()}")
+            progressConsole?.appendLine("start delete ${dirPath}:$deleted")
         })
     }
 
@@ -1011,6 +1018,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                                 )
                             })
                         } ?: run {
+                            cloneFailAndDeleteFiles(localPath, repoName)
                             MainHandler.runOnMain(Runnable {
                                 result.success(
                                     GsonUtil.bean2json(
@@ -1024,6 +1032,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                         }
                     } catch (e: Throwable) {
                         e.printStackTrace()
+                        cloneFailAndDeleteFiles(localPath, repoName)
                         MainHandler.runOnMain(Runnable {
                             result.success(
                                 GsonUtil.bean2json(
@@ -1123,6 +1132,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                     })
                 } ?: run {
                     Log.e(TAG, "clone失败，创建文件夹失败")
+                    cloneFailAndDeleteFiles(localPath, repoName)
                     MainHandler.runOnMain(Runnable {
                         result.success(
                             GsonUtil.bean2json(
@@ -1136,6 +1146,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 }
             } catch (e: Throwable) {
                 Log.e(TAG, e.toString())
+                cloneFailAndDeleteFiles(localPath, repoName)
                 e.printStackTrace()
                 MainHandler.runOnMain(Runnable {
                     result.success(
@@ -1187,6 +1198,13 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
         }
     }
 
+    private fun cloneFailAndDeleteFiles(localPath: String, localRepoName: String) {
+        MainHandler.runOnMain(Runnable {
+            progressConsole?.appendLine("clone fail , start delete ${localPath}${File.separator}${localRepoName}.")
+        })
+        deleteInvalidRepo("${localPath}${File.separator}${localRepoName}")
+    }
+
     private fun cloneUseKeyPair(
         aty: Activity,
         uri: String,
@@ -1228,6 +1246,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                     })
                 } ?: run {
                     Log.e(TAG, "clone失败，创建文件夹失败")
+                    cloneFailAndDeleteFiles(localPath, localRepoName)
                     MainHandler.runOnMain(Runnable {
                         result.success(
                             GsonUtil.bean2json(
@@ -1241,6 +1260,7 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 }
             } catch (e: Throwable) {
                 e.printStackTrace()
+                cloneFailAndDeleteFiles(localPath, localRepoName)
                 MainHandler.runOnMain(Runnable {
                     result.success(
                         GsonUtil.bean2json(
@@ -1342,9 +1362,9 @@ class WReaderMethodCallHandler(private var externalHelper: IExternalMethodCallHe
                 console.dismiss()
                 console.release()
                 progressConsole = null
+
             })
         }
-
     }
 
     fun onDestroy() {

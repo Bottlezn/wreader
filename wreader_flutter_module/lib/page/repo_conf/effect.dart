@@ -219,17 +219,18 @@ _cloneDir(Context<RepoConfigState> ctx) async {
 /// 使用密钥对clone项目
 _cloneUseKeyPair(Context<RepoConfigState> ctx) async {
   final state = ctx.state;
-  dynamic result = await TransBridgeChannel.cloneUseAccountAndPwd(
+  dynamic result = await TransBridgeChannel.cloneUseKeyPair(
       state.gitUriController.text.trim(),
       state.gitRootDirController.getText().trim(),
-      state.accountController.text.trim(),
-      state.pwdController.text.trim(),
-      repoName: state.gitTargetDirController.text.trim());
+      state.priKeyController.text.trim(),
+      state.pubKeyController.text.trim(),
+      repoName: state.gitTargetDirController.text.trim(),
+      priKeyPass: state.priPassController.text.trim());
   Map<String, dynamic> map = JsonUtil.decode(result);
   _dismissCloneLoading(ctx.context);
   if ('success' == map['result']) {
     await _saveRepoConf2Db(state, ctx.context,
-        AuthenticationWay.ACCOUNT_AND_PWD, map['currentBranch']);
+        AuthenticationWay.KEY_PAIR, map['currentBranch']);
     TransBridgeChannel.showToast(StrsToast.cloneSuccess());
   } else {
     TransBridgeChannel.showToast("${StrsToast.parseFail()}:${map['result']}");

@@ -82,7 +82,7 @@ class TransBridgeChannel {
         JsonUtil.encode(_wrapCommonMap(gitUrl, localPath, repoName)));
   }
 
-  static Future<String> showToast(String content, [int duration = 0]) async {
+  static Future<String> showToast(String content, [int duration = 1]) async {
     Map<String, dynamic> map = HashMap<String, dynamic>();
     map['content'] = content;
     map['duration'] = duration;
