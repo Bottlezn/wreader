@@ -2,6 +2,12 @@
 
 [last APK](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/lastRelease/DownloadUrl.md)  
 
+### v0.6
+
+[Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.6_release.apk)  
+
+1. Optimize reader page ui.
+
 ### v0.5
 
 [Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.5_release.apk)  
