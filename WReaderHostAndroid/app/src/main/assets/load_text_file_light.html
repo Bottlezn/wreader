@@ -14,8 +14,11 @@
     <script src="file:///android_asset/base64.min.js"></script>
     <script src="file:///android_asset/jquery.min.js"></script>
     <script src="file:///android_asset/strapdown.js"></script>
+    <style type="text/css">
+        li {line-height:1.8;}
+    </style>
 </head>
-<body>
+<body id='body'>
 <!--添加间距-->
 <div style="height:10px;"></div>
 <div id='mdContent'></div>
@@ -104,6 +107,10 @@
                 preTags[i].style.whiteSpace="pre";
                 preTags[i].style.width="80";
             }
+            var body = document.getElementById('body');
+            body.style.paddingRight='10px';
+            body.style.paddingLeft='10px';
+            body.style.paddingBottom='10px';
         }
 </script>
 </body>

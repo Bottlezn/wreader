@@ -200,7 +200,10 @@ class MdReaderActivity : BaseAty() {
     private fun loadEnvConf() {
         confMap.clear()
         confMap[FlutterModuleDbConst.BRIGHTNESS_MODE] =
-            intent?.getIntExtra(FlutterModuleDbConst.BRIGHTNESS_MODE, FlutterModuleDbConst.LIGHT_MODE)
+            intent?.getIntExtra(
+                FlutterModuleDbConst.BRIGHTNESS_MODE,
+                FlutterModuleDbConst.LIGHT_MODE
+            )
         ivBrightnessMode.setImageResource(
             if (confMap[FlutterModuleDbConst.BRIGHTNESS_MODE] == FlutterModuleDbConst.LIGHT_MODE)
                 R.drawable.icon_mode_light
@@ -519,13 +522,13 @@ class MdReaderActivity : BaseAty() {
     }
 
     override fun onDestroy() {
+        super.onDestroy()
         releaseAnimator()
         //释放WebView
         wvMdReader.stopLoading()
         wvMdReader.settings.javaScriptEnabled = false
         wvMdReader.removeAllViews()
         wvMdReader.destroy()
-        super.onDestroy()
     }
 
     private inner class ImgClickJavascriptInterface {
