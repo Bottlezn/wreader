@@ -41,6 +41,9 @@ dependencies:
   flutter_i18n: ^0.8.3
   # 数据库，持久
   sqflite: ^1.2.0
+  # 图片缓存轮子
+  cached_network_image: ^2.2.0+1
+
 #  # 展示html文本
 #  flutter_html: ^0.11.1
 #  # 将md文本处理成html格式，再使用flutter_html展示

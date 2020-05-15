@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:wreader_flutter_module/consts/file_type.dart';
@@ -376,14 +377,38 @@ _buildReadingRecordItem(Map<String, dynamic> item) {
       var imgUri = item[ReadingRecordConst.FILE_PATH] as String;
       if (imgUri != null) {
         if (imgUri.startsWith('http://') || imgUri.startsWith('https://')) {
-          return Image.network(
-            imgUri,
+          return CachedNetworkImage(
+            imageUrl: imgUri,
             fit: BoxFit.cover,
+            placeholder: (builder, uri) {
+              return Image.asset(
+                'assets/images/icon_unknown_file.png',
+                fit: BoxFit.cover,
+              );
+            },
+            errorWidget: (builder, uri, error) {
+              return Image.asset(
+                'assets/images/icon_unknown_file.png',
+                fit: BoxFit.cover,
+              );
+            },
           );
         } else if (imgUri.startsWith('/')) {
-          return Image.file(
-            File(imgUri),
+          return CachedNetworkImage(
+            imageUrl: imgUri,
             fit: BoxFit.cover,
+            placeholder: (builder, uri) {
+              return Image.asset(
+                'assets/images/icon_unknown_file.png',
+                fit: BoxFit.cover,
+              );
+            },
+            errorWidget: (builder, uri, error) {
+              return Image.asset(
+                'assets/images/icon_unknown_file.png',
+                fit: BoxFit.cover,
+              );
+            },
           );
         }
       }
