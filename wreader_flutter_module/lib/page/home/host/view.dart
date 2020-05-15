@@ -57,20 +57,7 @@ Widget buildView(HomeState state, Dispatch dispatch, ViewService viewService) {
     child: Scaffold(
       appBar: _appBar(state, viewService.context),
       body: state.isInit
-          ? Builder(
-              builder: (context) {
-                state.scaffoldContext = context;
-                if (state.openDrawer) {
-                  state.openDrawer = false;
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    if (state.scaffoldContext != null) {
-                      _expandSections(state, context);
-                    }
-                  });
-                }
-                return _showReadContent(state, context, dispatch);
-              },
-            )
+          ? _showReadContent(state, viewService.context, dispatch)
           : _showLoading(viewService.context),
     ),
   );
@@ -95,51 +82,59 @@ Widget _buildComeBackContent(
 ///构建最近阅读页面的UI
 Widget _buildReadingRecordWidget(
     HomeState state, BuildContext context, Dispatch dispatch) {
-  return GridView.builder(
-    key:
-        Key("${MainState.globalBrightnessMode}${MainState.globalLanguageCode}"),
-    gridDelegate: state.sliverDelegate,
-    itemCount: state.readingRecord.length,
-    itemBuilder: (context, index) {
-      Map<String, dynamic> item = state.readingRecord[index];
-      return GestureDetector(
-        onTap: () {
-          _openAndRead(state, context, item);
-        },
-        onLongPress: () {
-          _showMoreOperation(state, context, item, index, dispatch);
-        },
-        child: Container(
-          decoration: CommonDecoration.readingRecordDecoration(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                padding: EdgeInsets.all(10.px2Dp),
-                child: _buildReadingRecordItem(item),
-              ),
-              Align(
-                alignment: AlignmentDirectional(-1, 1),
-                child: Container(
-                  padding: EdgeInsets.all(10.px2Dp),
+  return RefreshIndicator(
+    child: GridView.builder(
+      key: Key(
+          "${MainState.globalBrightnessMode}${MainState.globalLanguageCode}"),
+      gridDelegate: state.sliverDelegate,
+      itemCount: state.readingRecord.length,
+      itemBuilder: (context, index) {
+        Map<String, dynamic> item = state.readingRecord[index];
+        return GestureDetector(
+          onTap: () {
+            _openAndRead(state, context, item);
+          },
+          onLongPress: () {
+            _showMoreOperation(state, context, item, index, dispatch);
+          },
+          child: Container(
+            decoration: CommonDecoration.readingRecordDecoration(),
+            child: Stack(
+              children: <Widget>[
+                Container(
                   width: double.infinity,
-                  color: Colors.grey[700],
-                  child: Text(
-                    item[ReadingRecordConst.FILE_NAME] ?? 'error',
-                    maxLines: 1,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTvStyles.textStyle10ColorWhite(),
-                  ),
+                  height: double.infinity,
+                  padding: EdgeInsets.all(10.px2Dp),
+                  child: _buildReadingRecordItem(item),
                 ),
-              )
-            ],
+                Align(
+                  alignment: AlignmentDirectional(-1, 1),
+                  child: Container(
+                    padding: EdgeInsets.all(10.px2Dp),
+                    width: double.infinity,
+                    color: Colors.grey[700],
+                    child: Text(
+                      item[ReadingRecordConst.FILE_NAME] ?? 'error',
+                      maxLines: 1,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTvStyles.textStyle10ColorWhite(),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      );
+        );
+      },
+      padding: EdgeInsets.all(20.px2Dp),
+    ),
+    onRefresh: () async {
+      var repoList = await WReaderSqlHelper.queryRepoPreItems();
+      var readingList = await WReaderSqlHelper.getAllReadingRecord();
+      dispatch(HomeActionCreator.refreshSuccess(repoList, readingList));
+      return Future.value();
     },
-    padding: EdgeInsets.all(20.px2Dp),
   );
 }
 
@@ -394,21 +389,9 @@ _buildReadingRecordItem(Map<String, dynamic> item) {
             },
           );
         } else if (imgUri.startsWith('/')) {
-          return CachedNetworkImage(
-            imageUrl: imgUri,
+          return Image.file(
+            File(imgUri),
             fit: BoxFit.cover,
-            placeholder: (builder, uri) {
-              return Image.asset(
-                'assets/images/icon_unknown_file.png',
-                fit: BoxFit.cover,
-              );
-            },
-            errorWidget: (builder, uri, error) {
-              return Image.asset(
-                'assets/images/icon_unknown_file.png',
-                fit: BoxFit.cover,
-              );
-            },
           );
         }
       }

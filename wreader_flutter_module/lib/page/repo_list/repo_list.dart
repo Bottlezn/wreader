@@ -45,8 +45,6 @@ class _RepoListState extends State<RepoListPage> {
     try {
       if (ModalRoute.of(context).isCurrent) {
         _queryRepoItems();
-      } else {
-        println('deactivate()');
       }
     } catch (e) {
       println(e);

@@ -13,8 +13,8 @@ import 'state.dart';
 Effect<HomeState> buildEffect() {
   return combineEffects(<Object, Effect<HomeState>>{
     Lifecycle.initState: _initState,
-    Lifecycle.didChangeAppLifecycleState: _didChangeAppLifecycleState,
     Lifecycle.deactivate: _deactivate,
+    Lifecycle.didChangeAppLifecycleState: _didChangeAppLifecycleState,
     HomeAction.doRefresh: _doRefresh,
   });
 }
@@ -52,6 +52,7 @@ void _didChangeAppLifecycleState(Action action, Context<HomeState> ctx) async {
 
 ///初始化页面数据
 void _initState(Action action, Context<HomeState> ctx) {
+  println("host : HomePage>_initState");
   WidgetsBinding.instance.addPostFrameCallback((_) async {
     await _runInitModuleFun(ctx);
   });

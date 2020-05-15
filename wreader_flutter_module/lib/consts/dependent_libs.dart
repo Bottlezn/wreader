@@ -9,6 +9,7 @@ const DEPENDENT_LIBS = <String>[
   "json_serializable",
   "flutter_i18n",
   "sqflite",
+  "cached_network_image",
   "JGit",
   "Glide",
   "slf4j-nop",
