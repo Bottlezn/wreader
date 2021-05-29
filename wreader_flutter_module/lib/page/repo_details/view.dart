@@ -89,7 +89,7 @@ _buildAppBar(
                     ),
                   ),
                   () {
-                    FluroRouter.navigateTo(
+                    FluroNavigator.navigateTo(
                         viewService.context, RouteNames.SEARCH_REPO_FILE);
                   },
                   defaultColor: Colors.transparent,

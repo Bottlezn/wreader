@@ -18,7 +18,7 @@ description: WReader的flutter module。
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,34 +26,34 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: 0.1.3
   # 咸鱼的状态管理软件
-  fish_redux: ^0.3.1
+  fish_redux: 0.3.7
   # router管理库
-  fluro: ^1.5.2
+  fluro: 1.6.3
   # 标准化的库
-  intl: ^0.16.0
+  intl: 0.17.0
   # json序列化注释
-  json_annotation: ^3.0.1
+  json_annotation: 3.0.1
   # json转换用的
-  convert: ^2.1.1
+  convert: 2.1.1
   # 国际化
-  flutter_i18n: ^0.8.3
+  flutter_i18n: 0.8.3
   # 数据库，持久
-  sqflite: ^1.2.0
+  sqflite: 1.3.0+1
   # 图片缓存轮子
-  cached_network_image: ^2.2.0+1
+  cached_network_image: 2.2.0+1
 
 #  # 展示html文本
 #  flutter_html: ^0.11.1
 #  # 将md文本处理成html格式，再使用flutter_html展示
-#  markdown: ^2.1.3
+#  markdown: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
   # 帮助生成相关json的库，还有其他作用不详
-  build_runner: ^1.7.4
-  json_serializable: ^3.2.5
+  build_runner: 1.9.0
+  json_serializable: 3.3.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

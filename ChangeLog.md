@@ -2,6 +2,9 @@
 
 [last APK](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/lastRelease/DownloadUrl.md)  
 
+### v0.8
+1. Upgrade configuration.
+
 ### v0.6
 
 [Download url](https://gitee.com/tea_too_tea_too/wreader_resources/blob/master/AndroidApk/wreader_v0.6_release.apk)  

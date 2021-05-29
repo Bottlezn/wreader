@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:wreader_flutter_module/page/about/about_me.dart';
 import 'package:wreader_flutter_module/page/home/host/page.dart';
 import 'package:wreader_flutter_module/page/home/search_reading/page.dart';
@@ -109,7 +109,7 @@ class Application {
 }
 
 ///使用Fluro作为跳转路由，替换一系列push操作，pop操作还是继续使用[Navigator]类
-class FluroRouter {
+class FluroNavigator {
   ///导航到指定path的页面，本module强制使用[RouteNames]的常量
   ///[replace]：为true时会置换掉当前页面，例如栈底是Home页面，栈顶是A页面，A打开B，
   ///此时replace为ture，那么A页面打开B页面之后，A页面会被置换掉。栈顶变成了B，栈底仍然是Home

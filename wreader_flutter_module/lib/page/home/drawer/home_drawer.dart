@@ -108,7 +108,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             ],
           ),
         ), () {
-      FluroRouter.navigateTo(context, RouteNames.LOG_LIST);
+      FluroNavigator.navigateTo(context, RouteNames.LOG_LIST);
     });
   }
 
@@ -151,7 +151,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   }
 
   _gotoAboutMe() {
-    FluroRouter.navigateTo(context, RouteNames.ABOUT);
+    FluroNavigator.navigateTo(context, RouteNames.ABOUT);
   }
 
   ///关闭App
@@ -237,7 +237,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             ],
           ),
         ), () {
-      FluroRouter.navigateTo(context, RouteNames.MANAGE_REPO);
+      FluroNavigator.navigateTo(context, RouteNames.MANAGE_REPO);
     });
   }
 
@@ -353,7 +353,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
         break;
     }
     await EnvironmentConfHelper.switchLanguageCode(context, code);
-    FluroRouter.navigateTo(context, "${RouteNames.HOME}?openDrawer=1",
+    FluroNavigator.navigateTo(context, "${RouteNames.HOME}?openDrawer=1",
         replace: true);
   }
 

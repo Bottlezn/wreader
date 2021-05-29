@@ -287,7 +287,7 @@ _saveRepoConf2Db(RepoConfigState state, BuildContext context,
   _dismissCloneLoading(context);
   if (isInserted) {
     TransBridgeChannel.showToast(StrsToast.saveSuccess());
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
       context,
       "${RouteNames.REPO_DETAILS}?"
       "gitLocalDir=${Uri.encodeComponent("${state.gitRootDirController.getText().trim()}/$targetDir")}"

@@ -46,7 +46,7 @@ _checkoutTag(Action action, Context<RepoDetailsState> ctx) async {
   if ('success' == resultMap['result'] && updateResult) {
     TransBridgeChannel.showToast(StrsToast.switchSuccessAndReload());
     //切换分支成功
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
         ctx.context,
         "${RouteNames.REPO_DETAILS}?"
         "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -56,7 +56,7 @@ _checkoutTag(Action action, Context<RepoDetailsState> ctx) async {
     //回滚分支
     TransBridgeChannel.showToast(StrsToast.operationFail());
     //切换分支成功
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
         ctx.context,
         "${RouteNames.REPO_DETAILS}?"
         "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -108,7 +108,7 @@ _fetch(Action action, Context<RepoDetailsState> ctx) async {
         "${StrsToast.operationFail()}：${resultMap['reason']}\n${StrsToast.reloadPage()}",
         1);
   }
-  FluroRouter.navigateTo(
+  FluroNavigator.navigateTo(
       ctx.context,
       "${RouteNames.REPO_DETAILS}?"
       "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -130,7 +130,7 @@ _reset(Action action, Context<RepoDetailsState> ctx) async {
         1);
   }
   //Cancel operation，重新加载当前页面
-  FluroRouter.navigateTo(
+  FluroNavigator.navigateTo(
       ctx.context,
       "${RouteNames.REPO_DETAILS}?"
       "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -205,7 +205,7 @@ _showNotCleanHint(Action action, Context<RepoDetailsState> ctx,
           ctx.state.repoDetailsBean.allBranch.first));
     } else {
       //Cancel operation，重新加载当前页面
-      FluroRouter.navigateTo(
+      FluroNavigator.navigateTo(
           ctx.context,
           "${RouteNames.REPO_DETAILS}?"
           "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -234,7 +234,7 @@ _pull(Action action, Context<RepoDetailsState> ctx) async {
         "${StrsToast.pullFail()}:${resultMap['reason']}");
   }
   //切换分支成功
-  FluroRouter.navigateTo(
+  FluroNavigator.navigateTo(
       ctx.context,
       "${RouteNames.REPO_DETAILS}?"
       "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -259,7 +259,7 @@ _switchExistedBranch(Action action, Context<RepoDetailsState> ctx) async {
       })) {
     TransBridgeChannel.showToast(StrsToast.switchSuccessAndReload());
     //切换分支成功
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
         ctx.context,
         "${RouteNames.REPO_DETAILS}?"
         "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -269,7 +269,7 @@ _switchExistedBranch(Action action, Context<RepoDetailsState> ctx) async {
     //回滚分支
     TransBridgeChannel.showToast(StrsToast.operationFail());
     //切换分支成功
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
         ctx.context,
         "${RouteNames.REPO_DETAILS}?"
         "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -297,7 +297,7 @@ _switchNewBranch(Action action, Context<RepoDetailsState> ctx) async {
       })) {
     TransBridgeChannel.showToast(StrsToast.switchSuccessAndReload());
     //切换分支成功
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
         ctx.context,
         "${RouteNames.REPO_DETAILS}?"
         "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"
@@ -307,7 +307,7 @@ _switchNewBranch(Action action, Context<RepoDetailsState> ctx) async {
     //回滚分支
     TransBridgeChannel.showToast(StrsToast.operationFail());
     //切换分支成功
-    FluroRouter.navigateTo(
+    FluroNavigator.navigateTo(
         ctx.context,
         "${RouteNames.REPO_DETAILS}?"
         "gitLocalDir=${Uri.encodeComponent("${ctx.state.repoDetailsBean.fullDir}")}"

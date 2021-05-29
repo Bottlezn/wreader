@@ -64,7 +64,7 @@ class CommonRepoListViewHelper {
         ),
       ),
       () {
-        FluroRouter.navigateTo(
+        FluroNavigator.navigateTo(
             context,
             "${RouteNames.REPO_DETAILS}?"
             "gitLocalDir=${Uri.encodeComponent("${items[index].rootDir}/${items[index].targetDir}")}"

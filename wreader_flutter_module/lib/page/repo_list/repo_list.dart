@@ -69,7 +69,7 @@ class _RepoListState extends State<RepoListPage> {
                   ),
                 ),
                 () {
-                  FluroRouter.navigateTo(context, RouteNames.REPO_CONF);
+                  FluroNavigator.navigateTo(context, RouteNames.REPO_CONF);
                 },
                 defaultColor: Colors.transparent,
                 pressColor: AppColors.COLOR_TRANS_20,

@@ -585,21 +585,21 @@ List<Widget> _obtainActions(HomeState state, BuildContext context) {
 ///展开HomeDrawer
 _expandSections(HomeState state, BuildContext context) {
   if (state.isInit) {
-    FluroRouter.navigateTo(context, RouteNames.SETTING);
+    FluroNavigator.navigateTo(context, RouteNames.SETTING);
   }
 }
 
 ///clone新的仓库
 _confNewRepoPage(HomeState state, BuildContext context) {
   if (state.isInit) {
-    FluroRouter.navigateTo(context, RouteNames.REPO_CONF);
+    FluroNavigator.navigateTo(context, RouteNames.REPO_CONF);
   }
 }
 
 ///去查看仓库列表
 _search(HomeState state, BuildContext context) {
   if (state.isInit) {
-    FluroRouter.navigateTo(context, RouteNames.SEARCH_READING_RECORD);
+    FluroNavigator.navigateTo(context, RouteNames.SEARCH_READING_RECORD);
   }
 }
 
@@ -607,9 +607,9 @@ _search(HomeState state, BuildContext context) {
 _toRepoListPage(HomeState state, BuildContext context) {
   if (state.isInit) {
     if (state.repoList.isEmpty) {
-      FluroRouter.navigateTo(context, RouteNames.REPO_CONF);
+      FluroNavigator.navigateTo(context, RouteNames.REPO_CONF);
     } else {
-      FluroRouter.navigateTo(context, RouteNames.REPO_LIST);
+      FluroNavigator.navigateTo(context, RouteNames.REPO_LIST);
     }
   }
 }
