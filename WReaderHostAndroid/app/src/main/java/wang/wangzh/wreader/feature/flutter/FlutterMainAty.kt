@@ -78,9 +78,9 @@ class FlutterMainAty : FlutterActivity(), IExternalMethodCallHelper {
         initChannel()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        Log.i(TAG, newConfig?.toString())
+        Log.i(TAG, newConfig.toString())
     }
 
     fun checkWriteExternalStorage() {

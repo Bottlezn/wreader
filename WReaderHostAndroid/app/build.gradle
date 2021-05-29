@@ -7,12 +7,12 @@ apply plugin: 'kotlin-android-extensions'
 apply from: 'sign.gradle'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "wang.wangzh.wreader"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode appVersionCode.toInteger()
         versionName appVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

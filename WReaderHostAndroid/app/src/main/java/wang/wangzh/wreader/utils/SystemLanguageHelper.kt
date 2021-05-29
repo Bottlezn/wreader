@@ -53,7 +53,8 @@ object SystemLanguageHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val localeList = LocaleList.forLanguageTags(getLocaleCode(selectLocale))
             LocaleList.setDefault(localeList)
-            conf.locales = localeList
+//            conf.locales = localeList
+//            conf.locales.
         } else {
             conf.locale = selectLocale
         }

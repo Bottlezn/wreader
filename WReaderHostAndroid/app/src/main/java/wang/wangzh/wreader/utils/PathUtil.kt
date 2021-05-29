@@ -124,7 +124,7 @@ object PathUtil {
         )
         try {
             cursor = context.contentResolver.query(
-                uri, projection, selection, selectionArgs,
+                uri!!, projection, selection, selectionArgs,
                 null
             )
             if (cursor != null && cursor.moveToFirst()) {
